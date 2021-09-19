@@ -17,6 +17,8 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+// const {dialog} = require('electron').remote;
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -32,6 +34,8 @@ ipcMain.on('ipc-example', async (event, arg) => {
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
+
+// ipcMain.handle('select-folder-popup', (handler, args) => {});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -81,13 +85,16 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      enableRemoteModule: true,
+      nodeIntegration: false,
+      contextIsolation: true,
+      sandbox: true,
     },
   });
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
   // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');

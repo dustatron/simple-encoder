@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
+  selectFolderPopup: () => ipcRenderer.invoke('select-folder-popup', true),
   ipcRenderer: {
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
