@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useDropzone } from 'react-dropzone';
-import ProRes from '../../types';
+import ProRes from '../../utils';
 
 // interface Props {}
 interface File {
@@ -25,7 +25,9 @@ interface File {
 
 function Home(): ReactElement {
   const [fileList, setFileList] = useState<File[]>([]);
-  const [toLocation, setToLocation] = useState<string>('/Users/dusty/Desktop/');
+  const [toLocation, setToLocation] = useState<string>(
+    '/Users/dusty/Desktop/test/'
+  );
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
 
   const handleProRes = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -102,9 +104,11 @@ function Home(): ReactElement {
             ProRes Flavor
           </Text>
           <Select value={proResFlavor} onChange={handleProRes}>
+            <option value={ProRes.PROXY}>{ProRes.PROXY}</option>
             <option value={ProRes.LT}>{ProRes.LT}</option>
             <option value={ProRes.STANDARD}>{ProRes.STANDARD}</option>
             <option value={ProRes.HQ}>{ProRes.HQ}</option>
+            <option value={ProRes.Quad4}>{ProRes.Quad4}</option>
           </Select>
         </VStack>
         <Box>
