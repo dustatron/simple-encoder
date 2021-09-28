@@ -3,11 +3,12 @@ import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import AlertMessage from './components/AlertMessage';
 import { SettingsProvider } from './context/SettingsContext';
-import Home from './components/Home';
+import Home from './containers/Home';
+// import Home from './components/Home';
 
-const Hello = () => {
-  return <Home />;
-};
+// const Hello = () => {
+//   return <Home />;
+// };
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         <SettingsProvider>
           <AlertMessage />
           <Switch>
-            <Route path="/" component={Hello} />
+            <Route path="/" component={Home} />
           </Switch>
         </SettingsProvider>
       </ChakraProvider>

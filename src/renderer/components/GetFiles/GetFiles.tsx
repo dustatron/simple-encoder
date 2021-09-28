@@ -113,15 +113,14 @@ function GetFiles(): ReactElement {
   const processBatch = async () => {
     for (let i = 0; i < filesList.length; i += 1) {
       if (!filesList[i].status.isComplete) {
-        // TO DO: Make this command
-        // await window.Main.makeProRes(
-        //   filesList[i].path,
-        //   filesList[i].name,
-        //   toLocation,
-        //   proResFlavor,
-        //   i,
-        //   makeUpdate
-        // );
+        await window.electron.ipcRenderer.makeProRes(
+          filesList[i].path,
+          filesList[i].name,
+          toLocation,
+          proResFlavor,
+          i,
+          makeUpdate
+        );
         console.log('file to convert', filesList[i].name);
       }
     }
