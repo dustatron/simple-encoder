@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactElement, useCallback, useState } from 'react';
 import {
   Container,
@@ -13,6 +14,18 @@ import { useDropzone } from 'react-dropzone';
 import ProRes from '../../types';
 
 // interface Props {}
+
+interface DialogResult {
+  canceled: boolean;
+  filePaths: string[];
+}
+
+type IpcRenderer = any;
+declare global {
+  interface Window {
+    electron: IpcRenderer;
+  }
+}
 interface File {
   lastModified: number;
   lastModifiedDate: Date;
@@ -27,6 +40,11 @@ function Home(): ReactElement {
   const [fileList, setFileList] = useState<File[]>([]);
   const [toLocation, setToLocation] = useState<string>('/Users/dusty/Desktop/');
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
+
+  const getFolder = async () => {
+    const folder: DialogResult = await window.electron.ipcRenderer.getFolder();
+    setToLocation(folder.filePaths[0]);
+  };
 
   const handleProRes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const flavor = e.target.value;
@@ -95,13 +113,7 @@ function Home(): ReactElement {
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
           />
-          <Button
-            onClick={() => {
-              window.electron.ipcRenderer.selectFolder();
-            }}
-          >
-            Location
-          </Button>
+          <Button onClick={getFolder}>Location</Button>
         </HStack>
         <VStack>
           <Text fontSize="xl" fontWeight="bold">
