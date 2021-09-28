@@ -1,7 +1,7 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, remote } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
-  selectFolderPopup: () => ipcRenderer.invoke('select-folder-popup', true),
+  // selectFolderPopup: () => ipcRenderer.invoke('select-folder-popup', true),
   ipcRenderer: {
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
@@ -19,6 +19,12 @@ contextBridge.exposeInMainWorld('electron', {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
+    },
+    selectFolder() {
+      remote.dialog.showOpenDialog({
+        properties: ['openDirectory', 'createDirectory'],
+      });
+      console.log('select folder');
     },
   },
 });

@@ -109,6 +109,7 @@ const createWindow = async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    app.quit();
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);

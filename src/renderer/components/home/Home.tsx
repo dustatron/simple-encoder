@@ -95,7 +95,13 @@ function Home(): ReactElement {
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
           />
-          <Button>Location</Button>
+          <Button
+            onClick={() => {
+              window.electron.ipcRenderer.selectFolder();
+            }}
+          >
+            Location
+          </Button>
         </HStack>
         <VStack>
           <Text fontSize="xl" fontWeight="bold">
