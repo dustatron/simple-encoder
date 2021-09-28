@@ -20,7 +20,7 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
     },
-    async getFolder() {
+    getFolder() {
       return new Promise((resolve, reject) => {
         const result = remote.dialog.showOpenDialog({
           properties: ['openDirectory', 'createDirectory'],
