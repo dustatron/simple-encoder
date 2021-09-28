@@ -113,7 +113,7 @@ function Home(): ReactElement {
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
           />
-          <Button onClick={getFolder}>Location</Button>
+          <Button onClick={getFolder}>Destination</Button>
         </HStack>
         <VStack>
           <Text fontSize="xl" fontWeight="bold">

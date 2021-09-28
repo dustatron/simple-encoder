@@ -21,7 +21,6 @@ contextBridge.exposeInMainWorld('electron', {
       }
     },
     getFolder: async () => {
-      console.log('getFolder');
       return new Promise((resolve, reject) => {
         const result = remote.dialog.showOpenDialog({
           properties: ['openDirectory', 'createDirectory'],
