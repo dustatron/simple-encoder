@@ -10,6 +10,13 @@ import {
 import Settings from '../../components/Settings';
 import GetFiles from '../../components/GetFiles';
 
+type API = any;
+declare global {
+  interface Window {
+    electron: API;
+  }
+}
+
 const Home = () => {
   return (
     <Container maxW="container.xl" padding="4">

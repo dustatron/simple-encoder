@@ -6,10 +6,6 @@ import { SettingsProvider } from './context/SettingsContext';
 import Home from './containers/Home';
 // import Home from './components/Home';
 
-// const Hello = () => {
-//   return <Home />;
-// };
-
 export default function App() {
   return (
     <Router>

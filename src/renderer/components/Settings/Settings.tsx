@@ -16,7 +16,7 @@ const Settings = () => {
   const { toLocation, setToLocation, fileTypes, setFileTypes } = useSettings();
 
   const openDialogBox = async () => {
-    const folder: DialogResult = await window.electron.ipcRenderer.getFolder();
+    const folder: DialogResult = await window.api.selectFolder();
     setToLocation(folder.filePaths[0]);
     if (!folder.canceled) {
       setToLocation(folder.filePaths[0]);

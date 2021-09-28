@@ -20,10 +20,10 @@ interface DialogResult {
   filePaths: string[];
 }
 
-type IpcRenderer = any;
+type API = any;
 declare global {
   interface Window {
-    electron: IpcRenderer;
+    api: API;
   }
 }
 interface File {
@@ -42,7 +42,8 @@ function Home(): ReactElement {
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
 
   const getFolder = async () => {
-    const folder: DialogResult = await window.electron.ipcRenderer.getFolder();
+    // window.api.selectFolder();
+    const folder: DialogResult = await window.api.selectFolder();
     setToLocation(folder.filePaths[0]);
   };
 
