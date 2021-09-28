@@ -1,22 +1,25 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
+import AlertMessage from './components/AlertMessage';
+import { SettingsProvider } from './context/SettingsContext';
 import Home from './components/Home';
 
 const Hello = () => {
-  return (
-    <ChakraProvider>
-      <Home />
-    </ChakraProvider>
-  );
+  return <Home />;
 };
 
 export default function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
+      <ChakraProvider>
+        <SettingsProvider>
+          <AlertMessage />
+          <Switch>
+            <Route path="/" component={Hello} />
+          </Switch>
+        </SettingsProvider>
+      </ChakraProvider>
     </Router>
   );
 }
