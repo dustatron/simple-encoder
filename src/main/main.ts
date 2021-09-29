@@ -15,9 +15,15 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath, userSelectsFolder } from './util';
+import { resolveHtmlPath, userSelectsFolder, makeProRes } from './mainUtils';
 
-// const {dialog} = require('electron').remote;
+export interface Update {
+  progress?: number;
+  hasEnded: boolean;
+  errorMessage: string;
+  hasStarted: boolean;
+  isComplete: boolean;
+}
 
 export default class AppUpdater {
   constructor() {
@@ -44,6 +50,13 @@ ipcMain.on('run', (event, arg) => {
 ipcMain.on('selectFolder', async (event, arg) => {
   const result = await userSelectsFolder();
   event.reply('replySelectedFolder', result);
+});
+
+ipcMain.on('makeProRes', (event, args) => {
+  const callback = (index: number, update: Update) => {
+    event.reply('replyMakeProRes', { index, ...update });
+  };
+  makeProRes(callback, args);
 });
 
 ipcMain.handle('select-folder', async (handler, args) => {
@@ -148,9 +161,10 @@ const createWindow = async () => {
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // if (process.platform !== 'darwin') {
+  //   app.quit();
+  // }
+  app.quit();
 });
 
 app.whenReady().then(createWindow).catch(console.log);

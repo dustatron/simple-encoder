@@ -18,9 +18,31 @@ import {
 import { ArrowRightIcon, DeleteIcon } from '@chakra-ui/icons';
 import { isEmpty } from 'lodash';
 import { useDropzone } from 'react-dropzone';
-import { File, ProRes, ActionsFiles, useMakeUpdate } from '../../utils';
+import {
+  File,
+  ProRes,
+  ActionsFiles,
+  useMakeUpdate,
+  ConvertStatus,
+} from '../../utils';
 import { useSettings } from '../../context/SettingsContext';
 import ListItem from '../ListItem';
+
+interface ProResProps {
+  filePath: string;
+  fileName: string;
+  toPath: string;
+  preset: ProRes;
+  index: number;
+}
+
+export interface Update {
+  progress?: number;
+  hasEnded: boolean;
+  errorMessage: string;
+  hasStarted: boolean;
+  isComplete: boolean;
+}
 
 function GetFiles(): ReactElement {
   const {
@@ -113,15 +135,26 @@ function GetFiles(): ReactElement {
   const processBatch = async () => {
     for (let i = 0; i < filesList.length; i += 1) {
       if (!filesList[i].status.isComplete) {
-        await window.electron.ipcRenderer.makeProRes(
-          filesList[i].path,
-          filesList[i].name,
-          toLocation,
-          proResFlavor,
-          i,
-          makeUpdate
-        );
-        console.log('file to convert', filesList[i].name);
+        const params: ProResProps = {
+          fileName: filesList[i].name,
+          filePath: filesList[i].path,
+          index: i,
+          preset: proResFlavor,
+          toPath: toLocation,
+        };
+        window.api.send('makeProRes', params);
+        window.api.on('replyMakeProRes', (update: ConvertStatus) => {
+          makeUpdate(i, update);
+        });
+        // await window.electron.ipcRenderer.makeProRes(
+        //   filesList[i].path,
+        //   filesList[i].name,
+        //   toLocation,
+        //   proResFlavor,
+        //   i,
+        //   makeUpdate
+        // );
+        // console.log('file to convert', filesList[i].name);
       }
     }
   };

@@ -10,6 +10,7 @@ import {
   Reducer,
   SettingsHook,
   DialogResult,
+  Update,
 } from './types';
 import {
   removeFileExtension,
@@ -43,4 +44,5 @@ export type {
   Reducer,
   SettingsHook,
   DialogResult,
+  Update,
 };

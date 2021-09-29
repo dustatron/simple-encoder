@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('api', {
   selectFolder: () => ipcRenderer.invoke('select-folder', true),
   send: (channel, data) => {
     // whitelist channels
-    const validChannels = ['toMain', 'run', 'selectFolder'];
+    const validChannels = ['toMain', 'run', 'selectFolder', 'makeProRes'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
@@ -57,66 +57,5 @@ contextBridge.exposeInMainWorld('api', {
           });
       });
     },
-    // makeProRes: (filePath, fileName, toPath, preset, index, makeUpdate) => {
-    // const cleanName = removeFileExtension(fileName);
-
-    // console.log('cleanName', cleanName);
-    // const promise = new Promise((resolve, reject) => {
-    //   FfmpegCommand(filePath)
-    //     .videoCodec('prores_ks')
-    //     .audioCodec('pcm_s16le')
-    //     .outputOptions([
-    //       `-profile:v ${getPresetNumber(preset)}`,
-    //       '-qscale:v 9',
-    //       '-vendor ap10',
-    //       '-pix_fmt yuv422p10le',
-    //     ])
-    //     .on('start', function () {
-    //       const update = {
-    //         progress: undefined,
-    //         hasEnded: false,
-    //         errorMessage: '',
-    //         hasStarted: true,
-    //         isComplete: false,
-    //       };
-    //       makeUpdate(index, update);
-    //     })
-    //     .on('progress', function (info) {
-    //       const update = {
-    //         progress: info.percent,
-    //         hasEnded: false,
-    //         errorMessage: '',
-    //         hasStarted: true,
-    //         isComplete: false,
-    //       };
-    //       makeUpdate(index, update);
-    //     })
-    //     .on('end', function () {
-    //       const update = {
-    //         progress: undefined,
-    //         hasEnded: true,
-    //         errorMessage: '',
-    //         hasStarted: true,
-    //         isComplete: true,
-    //       };
-    //       makeUpdate(index, update);
-    //       resolve();
-    //     })
-    //     .on('error', function (err) {
-    //       const message = `error : ${err.message}`;
-    //       const update = {
-    //         progress: undefined,
-    //         hasEnded: false,
-    //         errorMessage: message,
-    //         hasStarted: true,
-    //         isComplete: false,
-    //       };
-    //       makeUpdate(index, update);
-    //       return reject(new Error(err));
-    //     })
-    //     .save(path.join(toPath, `${cleanName}.mov`));
-    // });
-    // return promise;
-    // },
   },
 });

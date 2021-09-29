@@ -23,6 +23,13 @@ const Settings = () => {
       }
     });
   };
+
+  const handleTest = () => {
+    window.api.send('makeProRes', { test: 'from test args' });
+    window.api.on('replyMakeProRes', (arg: string) => {
+      console.log(`handle test ${arg}`);
+    });
+  };
   return (
     <Stack spacing="5">
       <FormControl id="Destination" isRequired>
@@ -58,6 +65,7 @@ const Settings = () => {
         <Text as="p" fontSize="sm" color="gray.500">
           This tool will match the frame rate and resolution of the source file.
         </Text>
+        <Button onClick={handleTest}>Test</Button>
       </Box>
     </Stack>
   );

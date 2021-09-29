@@ -10,6 +10,14 @@ export enum ProRes {
   Quad4 = 'ProRes 4444',
 }
 
+export interface Update {
+  progress?: number;
+  hasEnded: boolean;
+  errorMessage: string;
+  hasStarted: boolean;
+  isComplete: boolean;
+}
+
 export enum ActionsFiles {
   AddFiles = 'ADD_FILES',
   ClearAll = 'CLEAR_ALL',
