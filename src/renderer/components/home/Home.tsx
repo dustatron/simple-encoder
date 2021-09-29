@@ -41,7 +41,7 @@ function Home(): ReactElement {
   const [toLocation, setToLocation] = useState<string>(
     '/Users/dusty/Desktop/test/'
   );
-  const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
+  // const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
 
   const handleRun = () => {
     window.api.send('run', 'test');
@@ -63,7 +63,7 @@ function Home(): ReactElement {
 
   const handleProRes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const flavor = e.target.value;
-    setProResFlavor(flavor as ProRes);
+    // setProResFlavor(flavor as ProRes);
   };
 
   const onDropMemo = useCallback(
@@ -134,13 +134,13 @@ function Home(): ReactElement {
           <Text fontSize="xl" fontWeight="bold">
             ProRes Flavor
           </Text>
-          <Select value={proResFlavor} onChange={handleProRes}>
+          {/* <Select value={proResFlavor} onChange={handleProRes}>
             <option value={ProRes.PROXY}>{ProRes.PROXY}</option>
             <option value={ProRes.LT}>{ProRes.LT}</option>
             <option value={ProRes.STANDARD}>{ProRes.STANDARD}</option>
             <option value={ProRes.HQ}>{ProRes.HQ}</option>
             <option value={ProRes.Quad4}>{ProRes.Quad4}</option>
-          </Select>
+          </Select> */}
         </VStack>
         <Box>
           <Button colorScheme="facebook" onClick={handleRun}>
