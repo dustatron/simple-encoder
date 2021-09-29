@@ -7,9 +7,26 @@ const { contextBridge, ipcRenderer, remote } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
   selectFolder: () => ipcRenderer.invoke('select-folder', true),
+  send: (channel, data) => {
+    // whitelist channels
+    const validChannels = ['toMain', 'run', 'selectFolder'];
+    if (validChannels.includes(channel)) {
+      ipcRenderer.send(channel, data);
+    }
+  },
+  on: (channel, func) => {
+    ipcRenderer.on(channel, (event, ...args) => func(...args));
+  },
   ipcRenderer: {
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
+    },
+    send: (channel, data) => {
+      // whitelist channels
+      const validChannels = ['toMain', 'run', 'selectFolder'];
+      if (validChannels.includes(channel)) {
+        ipcRenderer.send(channel, data);
+      }
     },
     on(channel, func) {
       const validChannels = ['ipc-example'];

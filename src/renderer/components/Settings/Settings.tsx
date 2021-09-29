@@ -16,11 +16,12 @@ const Settings = () => {
   const { toLocation, setToLocation, fileTypes, setFileTypes } = useSettings();
 
   const openDialogBox = async () => {
-    const folder: DialogResult = await window.api.selectFolder();
-    setToLocation(folder.filePaths[0]);
-    if (!folder.canceled) {
-      setToLocation(folder.filePaths[0]);
-    }
+    window.api.send('selectFolder');
+    window.api.on('replySelectedFolder', (folder: DialogResult) => {
+      if (folder && !folder.canceled) {
+        setToLocation(folder.filePaths[0]);
+      }
+    });
   };
   return (
     <Stack spacing="5">

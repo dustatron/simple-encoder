@@ -41,10 +41,22 @@ function Home(): ReactElement {
   const [toLocation, setToLocation] = useState<string>('/Users/dusty/Desktop/');
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
 
+  const handleRun = () => {
+    window.api.send('run', 'test');
+    window.api.on('reply', (arg: string) => {
+      console.log('from reply', arg);
+    });
+  };
+
   const getFolder = async () => {
     // window.api.selectFolder();
-    const folder: DialogResult = await window.api.selectFolder();
-    setToLocation(folder.filePaths[0]);
+    // const folder: DialogResult = await window.api.selectFolder();
+    // window.api.send('selectFolder');
+    // window.api.on('replySelectedFolder', (folder: object) => {
+    //   if (folder) {
+    //     setToLocation(folder.filePaths[0]);
+    //   }
+    // });
   };
 
   const handleProRes = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -127,7 +139,9 @@ function Home(): ReactElement {
           </Select>
         </VStack>
         <Box>
-          <Button colorScheme="facebook">Run</Button>
+          <Button colorScheme="facebook" onClick={handleRun}>
+            Run
+          </Button>
         </Box>
       </VStack>
     </Container>

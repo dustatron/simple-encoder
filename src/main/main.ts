@@ -35,6 +35,17 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+// this is a test
+ipcMain.on('run', (event, arg) => {
+  console.log('from main', arg);
+  event.reply('reply', 'hello from main');
+});
+
+ipcMain.on('selectFolder', async (event, arg) => {
+  const result = await userSelectsFolder();
+  event.reply('replySelectedFolder', result);
+});
+
 ipcMain.handle('select-folder', async (handler, args) => {
   // userSelectsFolder();
   const result = await userSelectsFolder();

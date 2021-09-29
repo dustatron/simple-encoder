@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import AlertMessage from './components/AlertMessage';
 import { SettingsProvider } from './context/SettingsContext';
 import Home from './containers/Home';
+// test component
 // import Home from './components/Home';
 
 export default function App() {
