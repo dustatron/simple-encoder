@@ -1,22 +1,23 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import Home from './components/Home';
-
-const Hello = () => {
-  return (
-    <ChakraProvider>
-      <Home />
-    </ChakraProvider>
-  );
-};
+import AlertMessage from './components/AlertMessage';
+import { SettingsProvider } from './context/SettingsContext';
+import Home from './containers/Home';
+// test component
+// import Home from './components/Home';
 
 export default function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
+      <ChakraProvider>
+        <SettingsProvider>
+          <AlertMessage />
+          <Switch>
+            <Route path="/" component={Home} />
+          </Switch>
+        </SettingsProvider>
+      </ChakraProvider>
     </Router>
   );
 }

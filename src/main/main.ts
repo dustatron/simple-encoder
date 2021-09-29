@@ -15,7 +15,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { resolveHtmlPath, userSelectsFolder } from './util';
 
 // const {dialog} = require('electron').remote;
 
@@ -35,7 +35,22 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
-// ipcMain.handle('select-folder-popup', (handler, args) => {});
+// this is a test
+ipcMain.on('run', (event, arg) => {
+  console.log('from main', arg);
+  event.reply('reply', 'hello from main');
+});
+
+ipcMain.on('selectFolder', async (event, arg) => {
+  const result = await userSelectsFolder();
+  event.reply('replySelectedFolder', result);
+});
+
+ipcMain.handle('select-folder', async (handler, args) => {
+  // userSelectsFolder();
+  const result = await userSelectsFolder();
+  return result;
+});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -86,9 +101,9 @@ const createWindow = async () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
-      nodeIntegration: false,
+      nodeIntegration: true,
       contextIsolation: true,
-      sandbox: true,
+      // sandbox: true,
     },
   });
 
@@ -109,6 +124,7 @@ const createWindow = async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    app.quit();
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);

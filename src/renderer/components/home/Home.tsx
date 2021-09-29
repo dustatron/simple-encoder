@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactElement, useCallback, useState } from 'react';
 import {
   Container,
@@ -10,9 +11,21 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useDropzone } from 'react-dropzone';
-import ProRes from '../../utils';
+// import ProRes from '../../utils';
 
 // interface Props {}
+
+interface DialogResult {
+  canceled: boolean;
+  filePaths: string[];
+}
+
+type API = any;
+declare global {
+  interface Window {
+    api: API;
+  }
+}
 interface File {
   lastModified: number;
   lastModifiedDate: Date;
@@ -29,6 +42,24 @@ function Home(): ReactElement {
     '/Users/dusty/Desktop/test/'
   );
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
+
+  const handleRun = () => {
+    window.api.send('run', 'test');
+    window.api.on('reply', (arg: string) => {
+      console.log('from reply', arg);
+    });
+  };
+
+  const getFolder = async () => {
+    // window.api.selectFolder();
+    // const folder: DialogResult = await window.api.selectFolder();
+    // window.api.send('selectFolder');
+    // window.api.on('replySelectedFolder', (folder: object) => {
+    //   if (folder) {
+    //     setToLocation(folder.filePaths[0]);
+    //   }
+    // });
+  };
 
   const handleProRes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const flavor = e.target.value;
@@ -97,7 +128,7 @@ function Home(): ReactElement {
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
           />
-          <Button>Location</Button>
+          <Button onClick={getFolder}>Destination</Button>
         </HStack>
         <VStack>
           <Text fontSize="xl" fontWeight="bold">
@@ -112,7 +143,9 @@ function Home(): ReactElement {
           </Select>
         </VStack>
         <Box>
-          <Button colorScheme="facebook">Run</Button>
+          <Button colorScheme="facebook" onClick={handleRun}>
+            Run
+          </Button>
         </Box>
       </VStack>
     </Container>

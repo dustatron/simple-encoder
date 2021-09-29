@@ -4,6 +4,11 @@ module.exports = {
     // A temporary hack related to IDE not resolving correct package.json
     'import/no-extraneous-dependencies': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'no-await-in-loop': 'off',
+    'typescript-eslint/no-shadow': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'import/no-cycle': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
