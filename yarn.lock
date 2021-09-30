@@ -1694,6 +1694,16 @@
     "exec-sh" "^0.3.2"
     "minimist" "^1.2.0"
 
+"@derhuerst/http-basic@^8.2.0":
+  "integrity" "sha512-Rmn7qQQulw2sxJ8qGfZ7OuqMWuhz8V+L5xnYKMF5cXVcYqmgWqlVEAme90pF7Ya8OVhxVxLmhh0rI2k6t7ITWw=="
+  "resolved" "https://registry.npmjs.org/@derhuerst/http-basic/-/http-basic-8.2.1.tgz"
+  "version" "8.2.1"
+  dependencies:
+    "caseless" "^0.12.0"
+    "concat-stream" "^1.6.2"
+    "http-response-object" "^3.0.1"
+    "parse-cache-control" "^1.0.1"
+
 "@develar/schema-utils@~2.6.5":
   "integrity" "sha512-0cp4PsWQ/9avqTVMCtZ+GirikIA36ikvjtHweU4/j8yLtgObI0+JUPhYFScgwlteveGB1rt3Cm8UhN04XayDig=="
   "resolved" "https://registry.npmjs.org/@develar/schema-utils/-/schema-utils-2.6.5.tgz"
@@ -2339,6 +2349,11 @@
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-0.0.47.tgz"
   "version" "0.0.47"
 
+"@types/ffmpeg-static@^3.0.0":
+  "integrity" "sha512-JTwV8fFQYUgp8VLUKLd8zHfhFOoTTszMlofnWINAZYWSd/iR2ZZHJsWanUhBG4+c8QPfWE8P7t3nAjSxTNjevQ=="
+  "resolved" "https://registry.npmjs.org/@types/ffmpeg-static/-/ffmpeg-static-3.0.0.tgz"
+  "version" "3.0.0"
+
 "@types/fluent-ffmpeg@^2.1.18":
   "integrity" "sha512-LTteOx3RUmnPlKkvhvW9aGOHdJYyEtIiRBVbYVO/zPU65ZYQelbPJ+zBBT+IXup7doMvxVstX7NMoUTWKZOhww=="
   "resolved" "https://registry.npmjs.org/@types/fluent-ffmpeg/-/fluent-ffmpeg-2.1.18.tgz"
@@ -2448,6 +2463,11 @@
   "integrity" "sha512-p68+a+KoxpoB47015IeYZYRrdqMUcpbK8re/zpFB8Ld46LHC1lPEbp3EXgkEhAYEcPvjJF6ZO+869SQ0aH1dcA=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-15.0.2.tgz"
   "version" "15.0.2"
+
+"@types/node@^10.0.3":
+  "integrity" "sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz"
+  "version" "10.17.60"
 
 "@types/node@^14.6.2":
   "integrity" "sha512-sld7b/xmFum66AAKuz/rp/CUO8+98fMpyQ3SBfzzBNGMd/1iHBTAg9oyAvcYlAj46bpc74r91jSw2iFdnx29nw=="
@@ -3836,7 +3856,7 @@
   dependencies:
     "rsvp" "^4.8.4"
 
-"caseless@~0.12.0":
+"caseless@^0.12.0", "caseless@~0.12.0":
   "integrity" "sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw="
   "resolved" "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   "version" "0.12.0"
@@ -6082,6 +6102,16 @@
   dependencies:
     "pend" "~1.2.0"
 
+"ffmpeg-static@^4.4.0":
+  "integrity" "sha512-NIJHVPXlSsIK9pYvsTPh4ZlppauorpPLLeOaIG7VOXWQck4Fx4Qi7Ahe+j8mj8KZXhWwCg3Hx46JdWAIOWLcpg=="
+  "resolved" "https://registry.npmjs.org/ffmpeg-static/-/ffmpeg-static-4.4.0.tgz"
+  "version" "4.4.0"
+  dependencies:
+    "@derhuerst/http-basic" "^8.2.0"
+    "env-paths" "^2.2.0"
+    "https-proxy-agent" "^5.0.0"
+    "progress" "^2.0.3"
+
 "file-entry-cache@^6.0.1":
   "integrity" "sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg=="
   "resolved" "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -6961,6 +6991,13 @@
     "eventemitter3" "^4.0.0"
     "follow-redirects" "^1.0.0"
     "requires-port" "^1.0.0"
+
+"http-response-object@^3.0.1":
+  "integrity" "sha512-bqX0XTF6fnXSQcEJ2Iuyr75yVakyjIDCqroJQ/aHfSdlM743Cwqoi2nDYMzLGWUcuTWGWy8AAvOKXTfiv6q9RA=="
+  "resolved" "https://registry.npmjs.org/http-response-object/-/http-response-object-3.0.2.tgz"
+  "version" "3.0.2"
+  dependencies:
+    "@types/node" "^10.0.3"
 
 "http-signature@~1.2.0":
   "integrity" "sha1-muzZJRFHcvPZW2WmCruPfBj7rOE="
@@ -9488,6 +9525,11 @@
   "version" "1.0.1"
   dependencies:
     "callsites" "^3.0.0"
+
+"parse-cache-control@^1.0.1":
+  "integrity" "sha1-juqz5U+laSD+Fro493+iGqzC104="
+  "resolved" "https://registry.npmjs.org/parse-cache-control/-/parse-cache-control-1.0.1.tgz"
+  "version" "1.0.1"
 
 "parse-json@^4.0.0":
   "integrity" "sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA="

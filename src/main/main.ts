@@ -132,6 +132,7 @@ const createWindow = async () => {
     } else {
       mainWindow.show();
       mainWindow.focus();
+      mainWindow.webContents.openDevTools();
     }
   });
 

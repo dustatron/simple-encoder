@@ -3,6 +3,8 @@ import { URL } from 'url';
 import { dialog } from 'electron';
 import path from 'path';
 import FfmpegCommand from 'fluent-ffmpeg';
+// import ffmpegPath from 'ffmpeg-static-electron';
+import pathToFfmpeg from 'ffmpeg-static';
 import {
   ProRes,
   removeFileExtension,
@@ -55,7 +57,14 @@ export const makeProRes = (
 ) => {
   const { fileName, filePath, toPath, preset, index } = params;
   const cleanName = removeFileExtension(fileName);
+
   const promise = new Promise((resolve, reject) => {
+    // ffmpegPath.path.replace('app.asar', 'app.asar.unpacked');
+    // if (ffmpegPath.path) {
+    // } else {
+    //   reject(new Error('FFMPEG was not found'));
+    // }
+    FfmpegCommand.setFfmpegPath(pathToFfmpeg);
     FfmpegCommand(filePath)
       .videoCodec('prores_ks')
       .audioCodec('pcm_s16le')

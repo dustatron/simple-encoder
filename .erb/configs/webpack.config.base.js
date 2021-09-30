@@ -44,6 +44,7 @@ export default {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
+      FLUENTFFMPEG_COV: '',
     }),
   ],
 };

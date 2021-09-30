@@ -32,8 +32,12 @@
   "build": {
     "productName": "ElectronReact",
     "appId": "org.erb.ElectronReact",
-    "asar": true,
-    "asarUnpack": "**\\*.{node,dll}",
+    "asar": false,
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/bin/${os}/${arch}/ffmpeg",
+      "node_modules/ffmpeg-static/index.js",
+      "node_modules/ffmpeg-static/package.json"
+    ],
     "files": [
       "dist",
       "node_modules",
@@ -174,6 +178,7 @@
     "@testing-library/react": "^11.2.7",
     "@types/enzyme": "^3.10.9",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/ffmpeg-static": "^3.0.0",
     "@types/fluent-ffmpeg": "^2.1.18",
     "@types/history": "4.7.8",
     "@types/jest": "^26.0.24",
@@ -254,6 +259,7 @@
     "electron-debug": "^3.2.0",
     "electron-log": "^4.3.5",
     "electron-updater": "^4.3.8",
+    "ffmpeg-static": "^4.4.0",
     "fluent-ffmpeg": "^2.1.2",
     "framer-motion": "^4.1.17",
     "history": "4.x.x",
