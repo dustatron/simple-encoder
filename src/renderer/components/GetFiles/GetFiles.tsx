@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, {
   ReactElement,
   useCallback,
@@ -34,6 +35,7 @@ interface ProResProps {
   toPath: string;
   preset: ProRes;
   index: number;
+  originalItem: File;
 }
 
 export interface Update {
@@ -53,12 +55,13 @@ function GetFiles(): ReactElement {
     filesList,
     setAlert,
     fileTypes,
+    setSuccess,
   } = useSettings();
 
   const [status, setState] = useState<ReactElement<any, any>>();
   const [isStartDisabled, setIsStartDisabled] = useState<boolean>(true);
 
-  const makeUpdate = useMakeUpdate(dispatchFileList, filesList);
+  const makeUpdate = useMakeUpdate(dispatchFileList);
 
   const badge = (value: string, color: string) => {
     return (
@@ -141,20 +144,23 @@ function GetFiles(): ReactElement {
           index: i,
           preset: proResFlavor,
           toPath: toLocation,
+          originalItem: filesList[i],
         };
-        window.api.send('makeProRes', params);
-        window.api.on('replyMakeProRes', (update: ConvertStatus) => {
-          makeUpdate(i, update);
+        const runFFMPEG = new Promise((resolve, reject) => {
+          window.api.send('makeProRes', params);
+          window.api.on('replyMakeProRes', (update: ConvertStatus) => {
+            makeUpdate(update);
+
+            if (update.isComplete) {
+              resolve('completed');
+            }
+
+            if (update.hasEnded) {
+              reject(update.hasEnded);
+            }
+          });
         });
-        // await window.electron.ipcRenderer.makeProRes(
-        //   filesList[i].path,
-        //   filesList[i].name,
-        //   toLocation,
-        //   proResFlavor,
-        //   i,
-        //   makeUpdate
-        // );
-        // console.log('file to convert', filesList[i].name);
+        await runFFMPEG;
       }
     }
   };
@@ -169,7 +175,7 @@ function GetFiles(): ReactElement {
     if (filesList.length > 0) {
       await processBatch();
     }
-    return setAlert('Something went wrong');
+    return setSuccess('Batch has completed');
   };
 
   const onDropMemo = useCallback(

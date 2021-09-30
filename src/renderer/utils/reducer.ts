@@ -41,6 +41,7 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
               hasStarted: false,
               isComplete: false,
               progress: 0,
+              index: null,
             },
           };
         });
@@ -52,9 +53,9 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
     case ActionsFiles.UpdateItem:
       const newState = state.map((item, index) => {
         if (index === payload?.index) {
-          return payload.item;
+          return { ...item, status: payload.status };
         }
-        return item;
+        return state[index];
       });
       return newState as File[];
     default:

@@ -24,6 +24,7 @@ export function useSettings() {
 const fileState: State = [];
 export const SettingsProvider: FC = ({ children }): ReactElement => {
   const [alert, setAlert] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [filesList, dispatchFileList] = useReducer(filesReducer, fileState);
   const [toLocation, setToLocation] = useState<string>('');
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
@@ -71,6 +72,8 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
     setFileTypes,
     alert,
     setAlert,
+    success,
+    setSuccess,
   };
 
   return (

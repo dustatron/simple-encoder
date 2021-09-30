@@ -75,42 +75,36 @@ export const getPresetNumber = (profile: ProRes) => {
   }
 };
 
-export const useMakeUpdate = (dispatchFileList: any, filesList: File[]) => {
-  const makeUpdate = (index: number, update: ConvertStatus) => {
-    const { progress, hasEnded, errorMessage, hasStarted, isComplete } = update;
-    if (hasStarted && !hasEnded) {
+export const useMakeUpdate = (dispatchFileList: any) => {
+  const makeUpdate = (update: ConvertStatus) => {
+    const { progress, hasEnded, errorMessage, hasStarted, isComplete, index } =
+      update;
+    if (hasStarted && !hasEnded && !isComplete) {
       dispatchFileList({
         type: ActionsFiles.UpdateItem,
         payload: {
           index,
-          item: {
-            ...filesList[index],
-            status: {
-              hasStarted: true,
-              hasEnded: false,
-              isComplete: false,
-              progress: 0,
-              errorMessage: null,
-            },
+          status: {
+            hasStarted: true,
+            hasEnded: false,
+            isComplete: false,
+            progress,
+            errorMessage: null,
           },
         },
       });
     }
-
-    if (hasStarted && progress) {
+    if (hasStarted && progress && !isComplete) {
       dispatchFileList({
         type: ActionsFiles.UpdateItem,
         payload: {
           index,
-          item: {
-            ...filesList[index],
-            status: {
-              hasStarted: true,
-              hasEnded: false,
-              isComplete: false,
-              progress,
-              errorMessage: null,
-            },
+          status: {
+            hasStarted: true,
+            hasEnded: false,
+            isComplete: false,
+            progress,
+            errorMessage: null,
           },
         },
       });
@@ -121,15 +115,12 @@ export const useMakeUpdate = (dispatchFileList: any, filesList: File[]) => {
         type: ActionsFiles.UpdateItem,
         payload: {
           index,
-          item: {
-            ...filesList[index],
-            status: {
-              hasStarted: true,
-              hasEnded: true,
-              isComplete: true,
-              progress: 0,
-              errorMessage: null,
-            },
+          status: {
+            hasStarted: true,
+            hasEnded: true,
+            isComplete: true,
+            progress: 0,
+            errorMessage: null,
           },
         },
       });
@@ -140,15 +131,12 @@ export const useMakeUpdate = (dispatchFileList: any, filesList: File[]) => {
         type: ActionsFiles.UpdateItem,
         payload: {
           index,
-          item: {
-            ...filesList[index],
-            status: {
-              hasStarted: true,
-              hasEnded: true,
-              isComplete: false,
-              progress: 0,
-              errorMessage,
-            },
+          status: {
+            hasStarted: true,
+            hasEnded: true,
+            isComplete: false,
+            progress: 0,
+            errorMessage,
           },
         },
       });

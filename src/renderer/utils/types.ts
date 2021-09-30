@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-unused-vars */
+import { Status } from '@chakra-ui/toast';
 import { Dispatch } from 'React';
 
 export enum ProRes {
@@ -30,6 +31,8 @@ export interface ConvertStatus {
   isComplete: boolean;
   hasStarted: boolean;
   errorMessage: string | null;
+  originalItem?: File;
+  index: number | null;
 }
 
 export interface File {
@@ -58,6 +61,7 @@ export interface Payload {
   hasStarted?: boolean;
   errorMessage?: string | null;
   fileTypes?: string;
+  status?: Update;
 }
 
 export type State = File[];
@@ -77,6 +81,8 @@ export interface SettingsHook {
   setFileTypes: (fileTypes: string) => void;
   alert: string | null;
   setAlert: (alertMessage: string | null) => void;
+  success: string | null;
+  setSuccess: (successMessage: string | null) => void;
 }
 
 export type Reducer<State, Action> = (state: State, action: Action) => State;
