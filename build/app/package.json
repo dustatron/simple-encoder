@@ -1,0 +1,19 @@
+{
+  "name": "simple-encoder",
+  "productName": "simple-encoder",
+  "version": "0.1.0",
+  "description": "This tool is designed to make converting videos quick and painless.",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "Electron React Boilerplate Maintainers",
+    "email": "electronreactboilerplate@gmail.com",
+    "url": "https://github.com/electron-react-boilerplate"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/link-modules.js",
+    "postinstall": "yarn electron-rebuild && yarn link-modules"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
