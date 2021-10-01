@@ -68,8 +68,23 @@ const Settings = () => {
           onChange={(e) => setFfmpegPath(e.target.value)}
         />
         <Text fontSize="sm" color="gray.500" margin="0.5em 0">
-          Install ffmpeg and leave the path to the binary here
+          Path to FFMPEG on your system... buttons set common default paths.
         </Text>
+        <Button
+          marginRight="4em"
+          onClick={() => {
+            setFfmpegPath('/usr/bin/ffmpeg');
+          }}
+        >
+          Linux Default
+        </Button>
+        <Button
+          onClick={() => {
+            setFfmpegPath('/usr/local/bin/ffmpeg');
+          }}
+        >
+          Mac Default
+        </Button>
       </FormControl>
       <Box>
         <Text fontSize="lg">Basic Details</Text>
