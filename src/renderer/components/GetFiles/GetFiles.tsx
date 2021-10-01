@@ -184,7 +184,6 @@ function GetFiles(): ReactElement {
 
   const onDropMemo = useCallback(
     (acceptedFile) => {
-      console.log('dropMemo', acceptedFile);
       dispatchFileList({
         type: ActionsFiles.AddFiles,
         payload: { files: acceptedFile, fileTypes },

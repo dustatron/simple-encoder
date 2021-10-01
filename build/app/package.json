@@ -1,7 +1,7 @@
 {
   "name": "simple-encoder",
   "productName": "simple-encoder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This tool is designed to make converting videos quick and painless.",
   "main": "./dist/main/main.js",
   "author": {
