@@ -49,13 +49,13 @@ const ListItem = ({ file, index, dispatch }: Props) => {
       borderRadius="md"
       justifyContent="space-between"
     >
-      <Center width="10%">
+      <Center width="10%" padding="2">
         {!status.hasStarted && <Icon color="blue.500" w={6} h={6} as={FaTag} />}
         {status.hasStarted && !status.hasEnded && (
-          <Spinner color="blue.500" emptyColor="gray.200" thickness="4px" />
+          <Spinner color="blue.500" emptyColor="gray.200" thickness="2px" />
         )}
         {status.isComplete && (
-          <Icon color="green.500" w={10} h={10} as={FaCheckCircle} />
+          <Icon color="green.500" w={7} h={7} as={FaCheckCircle} />
         )}
         {status.errorMessage && (
           <Icon color="red.500" w={6} h={6} as={RiErrorWarningFill} />

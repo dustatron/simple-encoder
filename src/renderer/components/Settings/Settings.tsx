@@ -13,7 +13,14 @@ import { useSettings } from '../../context/SettingsContext';
 import { DEFAULT_FILE_EXTENSION, DialogResult } from '../../utils';
 
 const Settings = () => {
-  const { toLocation, setToLocation, fileTypes, setFileTypes } = useSettings();
+  const {
+    toLocation,
+    setToLocation,
+    fileTypes,
+    setFileTypes,
+    ffmpegPath,
+    setFfmpegPath,
+  } = useSettings();
 
   const openDialogBox = async () => {
     window.api.send('selectFolder');
@@ -24,14 +31,8 @@ const Settings = () => {
     });
   };
 
-  const handleTest = () => {
-    window.api.send('makeProRes', { test: 'from test args' });
-    window.api.on('replyMakeProRes', (arg: string) => {
-      console.log(`handle test ${arg}`);
-    });
-  };
   return (
-    <Stack spacing="5">
+    <Stack spacing="10">
       <FormControl id="Destination" isRequired>
         <FormLabel>Destination</FormLabel>
         <HStack>
@@ -60,12 +61,21 @@ const Settings = () => {
           Restore defaults
         </Button>
       </FormControl>
+      <FormControl id="file-types">
+        <FormLabel>Path to FFMPEG</FormLabel>
+        <Input
+          value={ffmpegPath}
+          onChange={(e) => setFfmpegPath(e.target.value)}
+        />
+        <Text fontSize="sm" color="gray.500" margin="0.5em 0">
+          Install ffmpeg and leave the path to the binary here
+        </Text>
+      </FormControl>
       <Box>
         <Text fontSize="lg">Basic Details</Text>
         <Text as="p" fontSize="sm" color="gray.500">
           This tool will match the frame rate and resolution of the source file.
         </Text>
-        <Button onClick={handleTest}>Test</Button>
       </Box>
     </Stack>
   );

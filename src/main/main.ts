@@ -108,8 +108,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 500,
+    height: 700,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -132,7 +132,8 @@ const createWindow = async () => {
     } else {
       mainWindow.show();
       mainWindow.focus();
-      mainWindow.webContents.openDevTools();
+      // Uncomment to open console in production build
+      // mainWindow.webContents.openDevTools();
     }
   });
 

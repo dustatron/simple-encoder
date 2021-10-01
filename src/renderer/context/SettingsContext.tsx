@@ -29,6 +29,7 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
   const [toLocation, setToLocation] = useState<string>('');
   const [proResFlavor, setProResFlavor] = useState<ProRes>(ProRes.STANDARD);
   const [fileTypes, updateFileTypes] = useState<string>(DEFAULT_FILE_EXTENSION);
+  const [ffmpegPath, setFfmpegPath] = useState<string>('/usr/local/bin/ffmpeg');
 
   const setFileTypes = (value: string) => {
     const cleanValue = cleanExtensionList(value);
@@ -36,15 +37,15 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
   };
 
   const setLocalStorage = () => {
-    localStorage.setItem('video-converter-to', toLocation);
-    localStorage.setItem('video-converter-flavor', proResFlavor);
-    localStorage.setItem('video-converter-fileTypes', fileTypes);
+    localStorage.setItem('simple-encoder-to', toLocation);
+    localStorage.setItem('simple-encoder-flavor', proResFlavor);
+    localStorage.setItem('simple-encoder-fileTypes', fileTypes);
   };
 
   useEffect(() => {
-    const destinationPath = localStorage.getItem('video-converter-to');
-    const flavor = localStorage.getItem('video-converter-flavor') as ProRes;
-    const fileExtensions = localStorage.getItem('video-converter-fileTypes');
+    const destinationPath = localStorage.getItem('simple-encoder-to');
+    const flavor = localStorage.getItem('simple-encoder-flavor') as ProRes;
+    const fileExtensions = localStorage.getItem('simple-encoder-fileTypes');
     if (destinationPath) {
       setToLocation(destinationPath);
     }
@@ -59,7 +60,7 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
   useEffect(() => {
     setLocalStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toLocation, proResFlavor]);
+  }, [toLocation, proResFlavor, fileTypes]);
 
   const value: SettingsHook = {
     filesList,
@@ -74,6 +75,8 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
     setAlert,
     success,
     setSuccess,
+    ffmpegPath,
+    setFfmpegPath,
   };
 
   return (

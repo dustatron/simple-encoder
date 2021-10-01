@@ -83,6 +83,8 @@ export interface SettingsHook {
   setAlert: (alertMessage: string | null) => void;
   success: string | null;
   setSuccess: (successMessage: string | null) => void;
+  ffmpegPath: string;
+  setFfmpegPath: (path: string) => void;
 }
 
 export type Reducer<State, Action> = (state: State, action: Action) => State;

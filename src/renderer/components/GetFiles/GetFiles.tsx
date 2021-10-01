@@ -15,6 +15,7 @@ import {
   Text,
   Divider,
   Flex,
+  Icon,
 } from '@chakra-ui/react';
 import { ArrowRightIcon, DeleteIcon } from '@chakra-ui/icons';
 import { isEmpty } from 'lodash';
@@ -36,6 +37,7 @@ interface ProResProps {
   preset: ProRes;
   index: number;
   originalItem: File;
+  ffmpegPath: string;
 }
 
 export interface Update {
@@ -56,6 +58,7 @@ function GetFiles(): ReactElement {
     setAlert,
     fileTypes,
     setSuccess,
+    ffmpegPath,
   } = useSettings();
 
   const [status, setState] = useState<ReactElement<any, any>>();
@@ -145,6 +148,7 @@ function GetFiles(): ReactElement {
           preset: proResFlavor,
           toPath: toLocation,
           originalItem: filesList[i],
+          ffmpegPath,
         };
         const runFFMPEG = new Promise((resolve, reject) => {
           window.api.send('makeProRes', params);
@@ -197,7 +201,7 @@ function GetFiles(): ReactElement {
 
   return (
     <>
-      <VStack spacing={2} marginTop={5}>
+      <VStack spacing={2}>
         <Stack direction="row" width="100%">
           <Text
             fontSize="l"
@@ -228,7 +232,7 @@ function GetFiles(): ReactElement {
           </Box>
         </Stack>
         <Box
-          height="8em"
+          height="7em"
           width="100%"
           border="2px"
           borderStyle="dashed"
@@ -283,12 +287,11 @@ function GetFiles(): ReactElement {
             </Box>
           </Stack>
           <Button
-            rightIcon={<DeleteIcon />}
             onClick={() => {
               dispatchFileList({ type: ActionsFiles.ClearAll });
             }}
           >
-            Clear All
+            <Icon as={DeleteIcon} />
           </Button>
         </Flex>
         <Stack direction="column" spacing={3} width="100%">
