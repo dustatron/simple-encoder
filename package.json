@@ -81,18 +81,18 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "dustatron",
+      "repo": "simple-enoder"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "https://github.com/dustatron/simple-encoder.git"
   },
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Simple Encoder",
+    "email": "dustymccord@gmail.com",
+    "url": "https://github.com/dustatron/simple-encoder"
   },
   "contributors": [
     {
@@ -108,20 +108,17 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/dustatron/simple-encoder/issues"
   },
   "keywords": [
     "electron",
-    "boilerplate",
-    "react",
+    "prores",
+    "video",
     "typescript",
     "ts",
-    "sass",
-    "webpack",
-    "hot",
-    "reload"
+    "encoding"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/dustatron/simple-encoder#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-unused-vars */
-import { Status } from '@chakra-ui/toast';
-import { Dispatch } from 'React';
+
+import { Dispatch } from 'react';
 
 export enum ProRes {
   PROXY = 'ProPres Proxy',

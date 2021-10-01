@@ -45,7 +45,10 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
             },
           };
         });
-      return [...state, ...formatFiles];
+      const updatedState = [...state, ...formatFiles!];
+      console.log('formatFiles', updatedState, payload);
+      // return [...state, ...formatFiles];
+      return updatedState;
     case ActionsFiles.ClearAll:
       return [];
     case ActionsFiles.RemoveItem:

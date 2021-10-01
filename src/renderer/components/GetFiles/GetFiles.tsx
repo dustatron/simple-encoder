@@ -184,9 +184,10 @@ function GetFiles(): ReactElement {
 
   const onDropMemo = useCallback(
     (acceptedFile) => {
+      console.log('dropMemo', acceptedFile);
       dispatchFileList({
         type: ActionsFiles.AddFiles,
-        payload: { index: 0, files: acceptedFile, fileTypes },
+        payload: { files: acceptedFile, fileTypes },
       });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -243,7 +244,7 @@ function GetFiles(): ReactElement {
           alignItems="center"
           bg="gray.100"
           id="From"
-          {...getRootProps({ refKey: 'initialFile' })} // dropzone element
+          {...getRootProps({ className: 'dropZone' })} // dropzone element
         >
           <input {...getInputProps()} />
           <Button

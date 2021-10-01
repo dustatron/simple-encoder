@@ -58,7 +58,7 @@ export const SettingsProvider: FC = ({ children }): ReactElement => {
       updateFileTypes(fileExtensions);
     }
     if (ffmpegPathLocal) {
-      updateFileTypes(ffmpegPathLocal);
+      setFfmpegPath(ffmpegPathLocal);
     }
   }, []);
 

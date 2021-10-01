@@ -5,9 +5,9 @@
   "description": "This tool is designed to make converting videos quick and painless.",
   "main": "./dist/main/main.js",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://github.com/electron-react-boilerplate"
+    "name": "Dustatron",
+    "email": "dustymccord@gmail.com",
+    "url": "https://github.com/dustatron/simple-encoder"
   },
   "scripts": {
     "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
