@@ -36,13 +36,11 @@ let mainWindow: BrowserWindow | null = null;
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
 // this is a test
 ipcMain.on('run', (event, arg) => {
-  console.log('from main', arg);
   event.reply('reply', 'hello from main');
 });
 
@@ -80,7 +78,7 @@ const installExtensions = async () => {
       extensions.map((name) => installer[name]),
       forceDownload
     )
-    .catch(console.log);
+    .catch((err: any) => console.error('Issues', err));
 };
 
 const createWindow = async () => {
@@ -162,7 +160,10 @@ app.on('window-all-closed', () => {
   app.quit();
 });
 
-app.whenReady().then(createWindow).catch(console.log);
+app
+  .whenReady()
+  .then(createWindow)
+  .catch((err) => console.error(err));
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
