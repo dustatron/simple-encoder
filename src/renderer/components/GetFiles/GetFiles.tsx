@@ -30,6 +30,8 @@ import {
 import { useSettings } from '../../context/SettingsContext';
 import ListItem from '../ListItem';
 
+const { api } = window;
+
 interface ProResProps {
   filePath: string;
   fileName: string;
@@ -128,10 +130,13 @@ function GetFiles(): ReactElement {
     }
   };
 
+  const getStatusBadgeMemo = useCallback(getStatusBadge, [filesList]);
+  const getStartStatusMemo = useCallback(getStartStatus, [filesList]);
+
   useEffect(() => {
-    setState(getStatusBadge());
-    getStartStatus();
-  }, [filesList]);
+    setState(getStatusBadgeMemo());
+    getStartStatusMemo();
+  }, [filesList, getStartStatusMemo, setState, getStatusBadgeMemo]);
 
   const handleProRes = (e: ChangeEvent<HTMLSelectElement>) => {
     const flavor = e.target.value;
@@ -151,8 +156,8 @@ function GetFiles(): ReactElement {
           ffmpegPath,
         };
         const runFFMPEG = new Promise((resolve, reject) => {
-          window.api.send('makeProRes', params);
-          window.api.on('replyMakeProRes', (update: ConvertStatus) => {
+          api.send('makeProRes', params);
+          api.on('replyMakeProRes', (update: ConvertStatus) => {
             makeUpdate(update);
 
             if (update.isComplete) {

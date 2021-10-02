@@ -5,6 +5,12 @@ import AlertMessage from './components/AlertMessage';
 import { SettingsProvider } from './context/SettingsContext';
 import Home from './containers/Home';
 
+declare global {
+  interface Window {
+    api: any;
+  }
+}
+
 export default function App() {
   return (
     <Router>

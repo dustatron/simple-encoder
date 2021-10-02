@@ -24,7 +24,6 @@ export interface Update {
   hasStarted: boolean;
   isComplete: boolean;
 }
-
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';

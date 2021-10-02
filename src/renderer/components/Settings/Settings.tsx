@@ -22,9 +22,11 @@ const Settings = () => {
     setFfmpegPath,
   } = useSettings();
 
+  const { api } = window;
+
   const openDialogBox = async () => {
-    window.api.send('selectFolder');
-    window.api.on('replySelectedFolder', (folder: DialogResult) => {
+    api.send('selectFolder');
+    api.on('replySelectedFolder', (folder: DialogResult) => {
       if (folder && !folder.canceled) {
         setToLocation(folder.filePaths[0]);
       }
