@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ProRes, ActionsFiles, File, ConvertStatus } from '.';
+import { ProRes, ActionsFiles, ConvertStatus } from '.';
 import {
   PROPRES_422,
   PROPRES_HQ,

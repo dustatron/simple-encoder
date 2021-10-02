@@ -47,7 +47,7 @@ ipcMain.on('run', (event, arg) => {
   event.reply('reply', 'hello from main');
 });
 
-ipcMain.on('selectFolder', async (event, arg) => {
+ipcMain.on('selectFolder', async (event) => {
   const result = await userSelectsFolder();
   event.reply('replySelectedFolder', result);
 });
@@ -57,12 +57,6 @@ ipcMain.on('makeProRes', (event, args) => {
     event.reply('replyMakeProRes', { index, ...update });
   };
   makeProRes(callback, args);
-});
-
-ipcMain.handle('select-folder', async (handler, args) => {
-  // userSelectsFolder();
-  const result = await userSelectsFolder();
-  return result;
 });
 
 if (process.env.NODE_ENV === 'production') {
