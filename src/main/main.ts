@@ -34,13 +34,13 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('ipc-example', async (event, arg) => {
+ipcMain.on('ipc-example', async (event) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
 // this is a test
-ipcMain.on('run', (event, arg) => {
+ipcMain.on('run', (event) => {
   event.reply('reply', 'hello from main');
 });
 
