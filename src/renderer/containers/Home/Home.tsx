@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-} from '@chakra-ui/react';
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react';
 import Settings from '../../components/Settings';
 import GetFiles from '../../components/GetFiles';
 
