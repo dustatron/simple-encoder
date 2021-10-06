@@ -88,3 +88,14 @@ export interface SettingsHook {
 }
 
 export type Reducer<State, Action> = (state: State, action: Action) => State;
+
+export enum OsOptions {
+  AIX = 'aix',
+  Darwin = 'darwin',
+  FreeBSD = 'freebsd',
+  Linux = 'linux',
+  OpenBSD = 'openbsd',
+  SunOS = 'sunos',
+  Win32 = 'win32',
+  Custom = 'custom',
+}

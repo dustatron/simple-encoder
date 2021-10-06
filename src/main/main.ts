@@ -14,6 +14,7 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import os from 'os';
 import MenuBuilder from './menu';
 import { resolveHtmlPath, userSelectsFolder, makeProRes } from './mainUtils';
 
@@ -54,6 +55,11 @@ ipcMain.on('makeProRes', (event, args) => {
     event.reply('replyMakeProRes', { index, ...update });
   };
   makeProRes(callback, args);
+});
+
+ipcMain.on('os', (event) => {
+  const platform = os.platform();
+  event.reply('replyOs', platform);
 });
 
 if (process.env.NODE_ENV === 'production') {

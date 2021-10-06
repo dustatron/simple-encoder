@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('api', {
   selectFolder: () => ipcRenderer.invoke('select-folder', true),
   send: (channel, data) => {
     // whitelist channels
-    const validChannels = ['toMain', 'run', 'selectFolder', 'makeProRes'];
+    const validChannels = ['toMain', 'run', 'selectFolder', 'makeProRes', 'os'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld('api', {
     },
     send: (channel, data) => {
       // whitelist channels
-      const validChannels = ['toMain', 'run', 'selectFolder'];
+      const validChannels = ['toMain', 'run', 'selectFolder', 'os'];
       if (validChannels.includes(channel)) {
         ipcRenderer.send(channel, data);
       }

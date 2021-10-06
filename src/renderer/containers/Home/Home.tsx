@@ -19,14 +19,14 @@ declare global {
 
 const Home = () => {
   return (
-    <Container maxW="container.xl" padding="2">
-      <Tabs isFitted variant="enclosed">
+    <>
+      <Tabs isFitted variant="enclosed" padding="2">
         <TabList mb="1em">
           <Tab>Batch Convert</Tab>
           <Tab>Settings</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
+        <TabPanels padding="0">
+          <TabPanel padding="0">
             <GetFiles />
           </TabPanel>
           <TabPanel>
@@ -34,7 +34,7 @@ const Home = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Container>
+    </>
   );
 };
 

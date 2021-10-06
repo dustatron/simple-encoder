@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from 'react';
 import {
-  VStack,
+  Center,
   Stack,
   Box,
   Button,
@@ -18,6 +18,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { ArrowRightIcon, DeleteIcon } from '@chakra-ui/icons';
+import { SiAddthis } from 'react-icons/si';
 import { isEmpty } from 'lodash';
 import { useDropzone } from 'react-dropzone';
 import {
@@ -205,9 +206,15 @@ function GetFiles(): ReactElement {
   });
 
   return (
-    <>
-      <VStack spacing={2}>
-        <Stack direction="row" width="100%">
+    <Stack spacing="0" height="100%">
+      <Box
+        minH="89vh"
+        width="100%"
+        // bg="gray.100"
+        id="From"
+        {...getRootProps({ className: 'dropZone' })} // dropzone element
+      >
+        <Stack direction="row" width="100%" padding="2">
           <Text
             fontSize="l"
             fontWeight="semibold"
@@ -236,40 +243,9 @@ function GetFiles(): ReactElement {
             </Button>
           </Box>
         </Stack>
-        <Box
-          height="7em"
-          width="100%"
-          border="2px"
-          borderStyle="dashed"
-          borderRadius="md"
-          display="flex"
-          flexDir="column"
-          justifyContent="center"
-          alignItems="center"
-          bg="gray.100"
-          id="From"
-          {...getRootProps({ className: 'dropZone' })} // dropzone element
-        >
-          <input {...getInputProps()} />
-          <Button
-            margin="auto"
-            display="block"
-            type="button"
-            onClick={open}
-            colorScheme="blue"
-          >
-            Choose files to convert
-          </Button>
-          {isDragActive ? (
-            <Box padding="5" color="gray.500">
-              Ready for files...
-            </Box>
-          ) : (
-            <Box padding="2" width="100%" textAlign="center" color="gray.500">
-              Or drag and drop there here
-            </Box>
-          )}
-        </Box>
+
+        <input {...getInputProps()} />
+
         <Flex width="100%" justifyContent="space-between">
           <Stack
             direction="row"
@@ -291,15 +267,82 @@ function GetFiles(): ReactElement {
               } of ${filesList.length}`}{' '}
             </Box>
           </Stack>
-          <Button
-            onClick={() => {
-              dispatchFileList({ type: ActionsFiles.ClearAll });
-            }}
-          >
-            <Icon as={DeleteIcon} />
-          </Button>
+          <Box>
+            <Button
+              type="button"
+              onClick={open}
+              colorScheme="blue"
+              marginRight="2"
+            >
+              <Icon as={SiAddthis} />
+            </Button>
+            <Button
+              onClick={() => {
+                dispatchFileList({ type: ActionsFiles.ClearAll });
+              }}
+            >
+              <Icon as={DeleteIcon} />
+            </Button>
+          </Box>
         </Flex>
-        <Stack direction="column" spacing={3} width="100%">
+        <Box>
+          {isDragActive ? (
+            <Center
+              padding="5"
+              left=".3em"
+              top="3em"
+              border="4px dashed"
+              borderColor="gray.500"
+              borderRadius="md"
+              height="90vh"
+              width="98vw"
+              opacity="0.8"
+              filter="blur 10px"
+              color="black"
+              bg="gray.400"
+              zIndex="500"
+              position="absolute"
+            >
+              <Box alignContent="center">
+                <Text
+                  as="h3"
+                  textAlign="center"
+                  fontWeight="extrabold"
+                  fontSize="3xl"
+                >
+                  Dropzone
+                </Text>
+                <Text
+                  textAlign="center"
+                  as="h4"
+                  fontWeight="bold"
+                  fontSize="lg"
+                  width="100%"
+                  color="gray.700"
+                >
+                  Add these files
+                </Text>
+              </Box>
+            </Center>
+          ) : (
+            ''
+          )}
+        </Box>
+        {filesList.length === 0 ? (
+          <Center height="30em">
+            <Text
+              fontSize="2xl"
+              fontWeight="semibold"
+              color="gray.600"
+              opacity="0.5"
+            >
+              Drag and Drop Files here
+            </Text>
+          </Center>
+        ) : (
+          ''
+        )}
+        <Stack direction="column" spacing={3} width="100%" marginTop="2">
           {filesList.map((file: File, index: number) => (
             <ListItem
               file={file}
@@ -309,8 +352,8 @@ function GetFiles(): ReactElement {
             />
           ))}
         </Stack>
-      </VStack>
-    </>
+      </Box>
+    </Stack>
   );
 }
 
