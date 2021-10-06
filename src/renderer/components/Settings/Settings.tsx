@@ -41,7 +41,7 @@ const Settings = () => {
     if (os === OsOptions.Darwin) {
       setFfmpegPath('/usr/local/bin/ffmpeg');
     } else if (os === OsOptions.Win32) {
-      setFfmpegPath(`C:\\Program Files\\ffmpeg`);
+      setFfmpegPath(`C:\\Program Files\\ffmpeg\\ffmpeg.exe`);
     } else if (os === OsOptions.Linux) {
       setFfmpegPath('/usr/bin/ffmpeg');
     } else if (os === OsOptions.Custom) {
