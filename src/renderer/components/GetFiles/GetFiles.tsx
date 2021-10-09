@@ -157,8 +157,8 @@ function GetFiles(): ReactElement {
           ffmpegPath,
         };
         const runFFMPEG = new Promise((resolve, reject) => {
-          api.send('makeProRes', params);
-          api.on('replyMakeProRes', (update: ConvertStatus) => {
+          api.send('make:prores', params);
+          api.on('reply:make:proRes', (update: ConvertStatus) => {
             makeUpdate(update);
 
             if (update.isComplete) {
@@ -190,6 +190,7 @@ function GetFiles(): ReactElement {
 
   const onDropMemo = useCallback(
     (acceptedFile) => {
+      console.log('acceptedFile', acceptedFile);
       dispatchFileList({
         type: ActionsFiles.AddFiles,
         payload: { files: acceptedFile, fileTypes },

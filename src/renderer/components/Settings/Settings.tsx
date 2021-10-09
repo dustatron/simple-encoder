@@ -27,8 +27,8 @@ const Settings = () => {
   } = useSettings();
 
   const getOsInfoMemo = useCallback(() => {
-    api.send('os');
-    api.on('replyOs', (osValue: string) => {
+    api.send('get:os');
+    api.on('reply:get:os', (osValue: string) => {
       setOs(osValue as OsOptions);
     });
   }, [api]);
@@ -52,8 +52,8 @@ const Settings = () => {
   }, [os, setFfmpegPath]);
 
   const openDialogBox = async () => {
-    api.send('selectFolder');
-    api.on('replySelectedFolder', (folder: DialogResult) => {
+    api.send('select:folder');
+    api.on('reply:selected:folder', (folder: DialogResult) => {
       if (folder && !folder.canceled) {
         setToLocation(folder.filePaths[0]);
       }

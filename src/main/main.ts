@@ -17,14 +17,8 @@ import log from 'electron-log';
 import os from 'os';
 import MenuBuilder from './menu';
 import { resolveHtmlPath, userSelectsFolder, makeProRes } from './mainUtils';
+import { UpdateVideoInfo } from './types';
 
-export interface Update {
-  progress?: number;
-  hasEnded: boolean;
-  errorMessage: string;
-  hasStarted: boolean;
-  isComplete: boolean;
-}
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -34,33 +28,6 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-
-ipcMain.on('ipc-example', async (event) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  event.reply('ipc-example', msgTemplate('pong'));
-});
-
-// this is a test
-ipcMain.on('run', (event) => {
-  event.reply('reply', 'hello from main');
-});
-
-ipcMain.on('selectFolder', async (event) => {
-  const result = await userSelectsFolder();
-  event.reply('replySelectedFolder', result);
-});
-
-ipcMain.on('makeProRes', (event, args) => {
-  const callback = (index: number, update: Update) => {
-    event.reply('replyMakeProRes', { index, ...update });
-  };
-  makeProRes(callback, args);
-});
-
-ipcMain.on('os', (event) => {
-  const platform = os.platform();
-  event.reply('replyOs', platform);
-});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -113,7 +80,6 @@ const createWindow = async () => {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: true,
-      // sandbox: true,
     },
   });
 
@@ -175,4 +141,21 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+ipcMain.on('select:folder', async (event) => {
+  const result = await userSelectsFolder();
+  event.reply('reply:selected:folder', result);
+});
+
+ipcMain.on('make:prores', (event, args) => {
+  const callback = (index: number, update: UpdateVideoInfo) => {
+    event.reply('reply:make:proRes', { index, ...update });
+  };
+  makeProRes(callback, args);
+});
+
+ipcMain.on('get:os', (event) => {
+  const platform = os.platform();
+  event.reply('reply:get:os', platform);
 });

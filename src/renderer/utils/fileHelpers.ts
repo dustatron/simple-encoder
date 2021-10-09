@@ -28,7 +28,7 @@ export const getFileExtension = (fileName: string) => {
   // eslint-disable-next-line no-plusplus
   for (let i = fileName.length; i > 0; i--) {
     if (fileName[i - 1] === '.') {
-      return fileName.substring(i, fileName.length);
+      return fileName.substring(i, fileName.length).toLocaleLowerCase();
     }
   }
   return fileName;
