@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import {
   HStack,
   Button,
@@ -16,7 +16,6 @@ import { DEFAULT_FILE_EXTENSION, DialogResult } from '../../utils';
 
 const Settings = () => {
   const { api } = window;
-  const [os, setOs] = useState<OsOptions>(OsOptions.Linux);
   const {
     toLocation,
     setToLocation,
@@ -24,32 +23,9 @@ const Settings = () => {
     setFileTypes,
     ffmpegPath,
     setFfmpegPath,
+    os,
+    setOs,
   } = useSettings();
-
-  const getOsInfoMemo = useCallback(() => {
-    api.send('get:os');
-    api.on('reply:get:os', (osValue: string) => {
-      setOs(osValue as OsOptions);
-    });
-  }, [api]);
-
-  useEffect(() => {
-    getOsInfoMemo();
-  }, [getOsInfoMemo]);
-
-  useEffect(() => {
-    if (os === OsOptions.Darwin) {
-      setFfmpegPath('/usr/local/bin/ffmpeg');
-    } else if (os === OsOptions.Win32) {
-      setFfmpegPath(`C:\\Program Files\\ffmpeg`);
-    } else if (os === OsOptions.Linux) {
-      setFfmpegPath('/usr/bin/ffmpeg');
-    } else if (os === OsOptions.Custom) {
-      // Let input override
-    } else {
-      setFfmpegPath('/usr/bin/ffmpeg');
-    }
-  }, [os, setFfmpegPath]);
 
   const openDialogBox = async () => {
     api.send('select:folder');

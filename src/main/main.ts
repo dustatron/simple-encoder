@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import os from 'os';
 import MenuBuilder from './menu';
-import { resolveHtmlPath, userSelectsFolder, makeProRes } from './mainUtils';
+import { userSelectsFolder, resolveHtmlPath, makeProRes } from './helpers';
 import { UpdateVideoInfo } from './types';
 
 export default class AppUpdater {
@@ -158,4 +158,8 @@ ipcMain.on('make:prores', (event, args) => {
 ipcMain.on('get:os', (event) => {
   const platform = os.platform();
   event.reply('reply:get:os', platform);
+});
+
+ipcMain.on('open:inFolder', (_, openToPath) => {
+  shell.showItemInFolder(openToPath);
 });

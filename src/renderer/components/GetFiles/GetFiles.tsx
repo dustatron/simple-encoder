@@ -190,7 +190,6 @@ function GetFiles(): ReactElement {
 
   const onDropMemo = useCallback(
     (acceptedFile) => {
-      console.log('acceptedFile', acceptedFile);
       dispatchFileList({
         type: ActionsFiles.AddFiles,
         payload: { files: acceptedFile, fileTypes },
@@ -349,7 +348,7 @@ function GetFiles(): ReactElement {
               file={file}
               dispatch={dispatchFileList}
               index={index}
-              key={file.path}
+              key={file.key}
             />
           ))}
         </Stack>

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { v4 } from 'uuid';
 import { ProRes, ActionsFiles, ConvertStatus } from '.';
 import {
   PROPRES_422,
   PROPRES_HQ,
   PROPRES_4444,
-  PROPRES_LT,
   PROPRES_PROXY,
+  PROPRES_LT,
 } from './recipes';
 
 export const removeFileExtension = (fileName: string) => {
@@ -84,6 +85,7 @@ export const useMakeUpdate = (dispatchFileList: any) => {
         type: ActionsFiles.UpdateItem,
         payload: {
           index,
+          key: v4(),
           status: {
             hasStarted: true,
             hasEnded: false,

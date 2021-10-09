@@ -38,6 +38,7 @@ export interface ConvertStatus {
 export interface File {
   lastModified: number;
   lastModifiedDate: Date;
+  key: string;
   name: string;
   path: string;
   size: number;
@@ -85,6 +86,8 @@ export interface SettingsHook {
   setSuccess: (successMessage: string | null) => void;
   ffmpegPath: string;
   setFfmpegPath: (path: string) => void;
+  os: string;
+  setOs: (os: OsOptions) => void;
 }
 
 export type Reducer<State, Action> = (state: State, action: Action) => State;
@@ -98,4 +101,5 @@ export enum OsOptions {
   SunOS = 'sunos',
   Win32 = 'win32',
   Custom = 'custom',
+  NAN = 'NO OS',
 }

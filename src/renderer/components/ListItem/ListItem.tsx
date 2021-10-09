@@ -2,17 +2,22 @@
 import React from 'react';
 import {
   Flex,
+  Stack,
   Center,
   Box,
   Button,
-  Icon,
   Progress,
   Spinner,
+  Text,
+  Icon,
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { FaTag, FaCheckCircle } from 'react-icons/fa';
 import { RiErrorWarningFill } from 'react-icons/ri';
+import { IoMdOpen } from 'react-icons/io';
 import { File, ActionsFiles, Action } from '../../utils';
+import { useSettings } from '../../context/SettingsContext';
+import { removeFileExtension } from '../../utils/fileHelpers';
 
 interface Props {
   file: File;
@@ -21,7 +26,27 @@ interface Props {
 }
 
 const ListItem = ({ file, index, dispatch }: Props) => {
+  const { toLocation } = useSettings();
+
   const { status } = file;
+
+  const handleOpenSource = () => {
+    window.api.send('open:inFolder', file.path);
+  };
+
+  const handleOpenCompleted = () => {
+    let os;
+    window.api.send('get:os');
+    window.api.on('reply:get:os', (osValue: string) => {
+      os = osValue;
+    });
+    const destinationProps = [
+      toLocation,
+      `${removeFileExtension(file.name)}.mov`,
+    ];
+    const finalPath = destinationProps.join('/');
+    window.api.send('open:inFolder', finalPath);
+  };
   const getStatusReport = () => {
     const { errorMessage, isComplete, hasEnded, hasStarted } = status;
     if (errorMessage) {
@@ -62,7 +87,30 @@ const ListItem = ({ file, index, dispatch }: Props) => {
         )}
       </Center>
       <Box padding="2" height="6em" width="100%">
-        Source: <strong>{file.name}</strong>
+        <Flex justifyContent="space-between" spacing="10">
+          <Button
+            leftIcon={<Icon as={IoMdOpen} />}
+            size="xs"
+            onClick={handleOpenSource}
+            colorScheme="facebook"
+          >
+            Source
+          </Button>
+          {status.isComplete && (
+            <Button
+              size="xs"
+              onClick={handleOpenCompleted}
+              leftIcon={<Icon as={IoMdOpen} />}
+              colorScheme="twitter"
+            >
+              Converted
+            </Button>
+          )}
+        </Flex>
+        <Text>
+          Source: <strong>{file.name}</strong>
+        </Text>
+
         <Box>Status: {getStatusReport()}</Box>
         {!status.isComplete && (
           <Progress hasStripe isAnimated value={status.progress} />
