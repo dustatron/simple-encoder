@@ -30,14 +30,21 @@ const ListItem = ({ file, index, dispatch }: Props) => {
   const { status } = file;
 
   const handleOpenSource = () => {
-    window.api.send('open:inFolder', file.path);
+    const filePath = file.path.replace(file.name, '');
+    const params = {
+      path: filePath,
+      fileName: file.name,
+    };
+    window.api.send('open:inFolder', params);
   };
 
   const handleOpenCompletedFileLocation = () => {
-    window.api.send('open:inFolder', {
+    const params = {
       path: toLocation,
       fileName: `${removeFileExtension(file.name)}.mov`,
-    });
+    };
+    console.log('params', params);
+    window.api.send('open:inFolder', params);
   };
 
   const getStatusReport = () => {

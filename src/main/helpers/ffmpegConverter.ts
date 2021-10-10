@@ -70,7 +70,7 @@ export const makeDraft = (
         callback(index, update);
         return reject(new Error(err));
       })
-      .save(path.join(toPath, `${cleanName}.mp4`));
+      .save(path.join(toPath, `${cleanName}.mov`));
   });
   return promise;
 };
