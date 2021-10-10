@@ -1,4 +1,4 @@
-import { ProRes } from '../renderer/utils';
+import { ProRes, File } from '../renderer/utils';
 
 export interface UpdateVideoInfo {
   progress?: number;
@@ -14,5 +14,6 @@ export interface ProResProps {
   toPath: string;
   preset: ProRes;
   index: number;
+  originalItem: File;
   ffmpegPath: string;
 }

@@ -144,27 +144,29 @@ function GetFiles(): ReactElement {
     setProResFlavor(flavor as ProRes);
   };
 
-  const processBatch = async () => {
-    for (let i = 0; i < filesList.length; i += 1) {
-      if (!filesList[i].status.isComplete) {
+  const processBatch = async (
+    videoList: File[],
+    proResFlavor: ProRes,
+    toLocation: string
+  ) => {
+    for (let i = 0; i < videoList.length; i += 1) {
+      if (!videoList[i].status.isComplete) {
         const params: ProResProps = {
-          fileName: filesList[i].name,
-          filePath: filesList[i].path,
+          fileName: videoList[i].name,
+          filePath: videoList[i].path,
           index: i,
           preset: proResFlavor,
           toPath: toLocation,
-          originalItem: filesList[i],
+          originalItem: videoList[i],
           ffmpegPath,
         };
         const runFFMPEG = new Promise((resolve, reject) => {
           api.send('make:prores', params);
           api.on('reply:make:proRes', (update: ConvertStatus) => {
             makeUpdate(update);
-
             if (update.isComplete) {
               resolve('completed');
             }
-
             if (update.hasEnded) {
               reject(update.hasEnded);
             }
@@ -183,7 +185,7 @@ function GetFiles(): ReactElement {
       return setAlert('No Files to convert');
     }
     if (filesList.length > 0) {
-      await processBatch();
+      await processBatch(filesList, proResFlavor, toLocation);
     }
     return setSuccess('Batch has completed');
   };

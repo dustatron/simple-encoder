@@ -24,7 +24,41 @@ A quick and simple User interface for video editors to build batch conversions p
 
 </div>
 
-## Install
+## Install Binaries
+
+**Download Links**
+
+Windows - Mac - Linux
+
+### Run on windows
+
+1. Install ffmpeg on your computer
+   - Included in the zip file is a ffmpeg folder
+   - Copy the ffmpeg folder to c:\Program Files\
+
+### Run on Mac
+
+1. Make sure ffmpeg is installed on your computer
+   - [Install with Home Brew](http://jollejolles.com/install-ffmpeg-on-mac-os-x/)
+   - [Download directly](https://evermeet.cx/ffmpeg/)
+2. The program will assume ffmpeg is located`'/usr/local/bin/ffmpeg'`
+
+3. Download the DMG and copy `Simple Encoder` to your apps folder
+
+### Run on Linux
+
+1. [Install ffmpeg on your distro](https://www.tecmint.com/install-ffmpeg-in-linux/)
+2. On ubuntu run `sudo apt install ffmpeg` in your terminal
+3. Then download the deb or AppImage and give the file executable permission
+
+### On First run
+
+When running the app for the first time for to the settings tab and...
+
+1. Set the destination folder
+2. Make sure your ffmpeg path is set correctly
+
+## Running the code locally
 
 - **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/400)**
 
