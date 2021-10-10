@@ -58,7 +58,7 @@ export const makeProRes = (
         callback(index, update);
         return resolve('complete');
       })
-      .on('error', function (err) {
+      .on('error', (err) => {
         const message = `error : ${err.message}`;
         const update = {
           progress: undefined,

@@ -34,6 +34,7 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
             path: file.path,
             size: file.size,
             type: file.type,
+            key: file.key,
             webkitRelativePath: file.webkitRelativePath,
             status: {
               errorMessage: null,

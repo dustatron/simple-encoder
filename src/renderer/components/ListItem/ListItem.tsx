@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   Flex,
-  Stack,
   Center,
   Box,
   Button,
@@ -34,19 +33,13 @@ const ListItem = ({ file, index, dispatch }: Props) => {
     window.api.send('open:inFolder', file.path);
   };
 
-  const handleOpenCompleted = () => {
-    let os;
-    window.api.send('get:os');
-    window.api.on('reply:get:os', (osValue: string) => {
-      os = osValue;
+  const handleOpenCompletedFileLocation = () => {
+    window.api.send('open:inFolder', {
+      path: toLocation,
+      fileName: `${removeFileExtension(file.name)}.mov`,
     });
-    const destinationProps = [
-      toLocation,
-      `${removeFileExtension(file.name)}.mov`,
-    ];
-    const finalPath = destinationProps.join('/');
-    window.api.send('open:inFolder', finalPath);
   };
+
   const getStatusReport = () => {
     const { errorMessage, isComplete, hasEnded, hasStarted } = status;
     if (errorMessage) {
@@ -99,7 +92,7 @@ const ListItem = ({ file, index, dispatch }: Props) => {
           {status.isComplete && (
             <Button
               size="xs"
-              onClick={handleOpenCompleted}
+              onClick={handleOpenCompletedFileLocation}
               leftIcon={<Icon as={IoMdOpen} />}
               colorScheme="twitter"
             >

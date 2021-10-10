@@ -161,6 +161,7 @@ ipcMain.on('get:os', (event) => {
   event.reply('reply:get:os', platform);
 });
 
-ipcMain.on('open:inFolder', (_, openToPath) => {
-  shell.showItemInFolder(openToPath);
+ipcMain.on('open:inFolder', (_, file) => {
+  const toPath = path.join(file.path, file.fileName);
+  shell.showItemInFolder(toPath);
 });
