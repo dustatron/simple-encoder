@@ -4,12 +4,25 @@
 import { Dispatch } from 'react';
 
 export enum ProRes {
+  SmallDraft = 'Draft @ 720',
   PROXY = 'ProPres Proxy',
   LT = 'ProPres LT',
   STANDARD = 'PropRes 422',
   HQ = 'ProRes HQ',
   Quad4 = 'ProRes 4444',
 }
+
+export interface ProResObject {
+  key: string;
+  name: ProRes;
+}
+
+export const ProResOptions: ProResObject[] = Object.entries(ProRes).map(
+  (flavor) => ({
+    key: flavor[0],
+    name: flavor[1],
+  })
+);
 
 export interface Update {
   progress?: number;

@@ -16,7 +16,12 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import os from 'os';
 import MenuBuilder from './menu';
-import { userSelectsFolder, resolveHtmlPath, makeProRes } from './helpers';
+import {
+  userSelectsFolder,
+  resolveHtmlPath,
+  makeProRes,
+  makeDraft,
+} from './helpers';
 import { UpdateVideoInfo } from './types';
 
 export default class AppUpdater {
@@ -154,6 +159,14 @@ ipcMain.on('make:prores', (event, args) => {
     event.reply('reply:make:proRes', { index, ...update });
   };
   makeProRes(callback, args);
+});
+
+ipcMain.on('make:draft', (event, args) => {
+  console.log('makeDraft');
+  const callback = (index: number, update: UpdateVideoInfo) => {
+    event.reply('reply:make:draft', { index, ...update });
+  };
+  makeDraft(callback, args);
 });
 
 ipcMain.on('get:os', (event) => {

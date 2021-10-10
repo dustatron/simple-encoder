@@ -11,6 +11,8 @@ import {
   SettingsHook,
   DialogResult,
   Update,
+  ProResObject,
+  ProResOptions,
 } from './types';
 import {
   removeFileExtension,
@@ -34,6 +36,7 @@ export {
   getFileExtension,
   cleanExtensionList,
   DEFAULT_FILE_EXTENSION,
+  ProResOptions,
 };
 export type {
   File,
@@ -45,4 +48,5 @@ export type {
   SettingsHook,
   DialogResult,
   Update,
+  ProResObject,
 };

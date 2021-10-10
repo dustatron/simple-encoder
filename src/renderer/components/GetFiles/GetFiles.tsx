@@ -27,6 +27,8 @@ import {
   ActionsFiles,
   useMakeUpdate,
   ConvertStatus,
+  ProResOptions,
+  ProResObject,
 } from '../../utils';
 import { useSettings } from '../../context/SettingsContext';
 import ListItem from '../ListItem';
@@ -144,6 +146,37 @@ function GetFiles(): ReactElement {
     setProResFlavor(flavor as ProRes);
   };
 
+  const draftProcess = async (
+    draftList: File[],
+    draftFlavor: ProRes,
+    toLocation: string
+  ) => {
+    for (let j = 0; j < draftList.length; j += 1) {
+      const draftParams: ProResProps = {
+        fileName: draftList[j].name,
+        filePath: draftList[j].path,
+        index: j,
+        preset: draftFlavor,
+        toPath: toLocation,
+        originalItem: draftList[j],
+        ffmpegPath,
+      };
+      const runFFMPEG = new Promise((resolve, reject) => {
+        api.send('make:draft', draftParams);
+        api.on('reply:make:draft', (update: ConvertStatus) => {
+          makeUpdate(update);
+          if (update.isComplete) {
+            resolve('completed');
+          }
+          if (update.hasEnded) {
+            reject(update.hasEnded);
+          }
+        });
+      });
+      await runFFMPEG;
+    }
+  };
+
   const processBatch = async (
     videoList: File[],
     proResFlavor: ProRes,
@@ -184,8 +217,11 @@ function GetFiles(): ReactElement {
     if (filesList.length <= 0) {
       return setAlert('No Files to convert');
     }
-    if (filesList.length > 0) {
+    if (filesList.length > 0 && !proResFlavor.includes('Draft')) {
       await processBatch(filesList, proResFlavor, toLocation);
+    }
+    if (filesList.length > 0 && proResFlavor.includes('Draft')) {
+      await draftProcess(filesList, proResFlavor, toLocation);
     }
     return setSuccess('Batch has completed');
   };
@@ -227,11 +263,11 @@ function GetFiles(): ReactElement {
             Presets
           </Text>
           <Select value={proResFlavor} onChange={handleProRes}>
-            <option value={ProRes.PROXY}>{ProRes.PROXY}</option>
-            <option value={ProRes.LT}>{ProRes.LT}</option>
-            <option value={ProRes.STANDARD}>{ProRes.STANDARD}</option>
-            <option value={ProRes.HQ}>{ProRes.HQ}</option>
-            <option value={ProRes.Quad4}>{ProRes.Quad4}</option>
+            {ProResOptions.map((option: ProResObject) => (
+              <option key={option.key} value={option.key}>
+                {option.name}
+              </option>
+            ))}
           </Select>
           <Box>
             <Button

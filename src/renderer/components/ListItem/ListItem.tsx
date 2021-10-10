@@ -79,7 +79,7 @@ const ListItem = ({ file, index, dispatch }: Props) => {
           <Icon color="red.500" w={6} h={6} as={RiErrorWarningFill} />
         )}
       </Center>
-      <Box padding="2" height="6em" width="100%">
+      <Box padding="2" minHeight="6em" width="100%">
         <Flex justifyContent="space-between" spacing="10">
           <Button
             leftIcon={<Icon as={IoMdOpen} />}
@@ -104,7 +104,9 @@ const ListItem = ({ file, index, dispatch }: Props) => {
           Source: <strong>{file.name}</strong>
         </Text>
 
-        <Box>Status: {getStatusReport()}</Box>
+        <Box>
+          Status: <Text>{getStatusReport()}</Text>
+        </Box>
         {!status.isComplete && (
           <Progress hasStripe isAnimated value={status.progress} />
         )}
