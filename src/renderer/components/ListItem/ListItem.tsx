@@ -43,7 +43,6 @@ const ListItem = ({ file, index, dispatch }: Props) => {
       path: toLocation,
       fileName: `${removeFileExtension(file.name)}.mov`,
     };
-    console.log('params', params);
     window.api.send('open:inFolder', params);
   };
 
