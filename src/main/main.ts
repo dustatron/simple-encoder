@@ -79,6 +79,7 @@ const createWindow = async () => {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
       nodeIntegration: true,
+      devTools: true,
       contextIsolation: true,
     },
   });
