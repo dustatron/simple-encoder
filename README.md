@@ -28,13 +28,13 @@ A quick and simple User interface for video editors to build batch conversions p
 
 **Download Links**
 
-Windows - Mac - Linux
+[Windows](https://github.com/dustatron/simple-encoder/releases/download/0.3.0/Simple.Encoder.Setup.0.3.0.exe) - [Mac](https://github.com/dustatron/simple-encoder/releases/download/0.3.0/Simple.Encoder-0.3.0.dmg) - [Linux AppImage](https://github.com/dustatron/simple-encoder/releases/download/0.3.0/Simple.Encoder-0.3.0.AppImage) - [Linux deb](https://github.com/dustatron/simple-encoder/releases/download/0.3.0/simple-encoder_0.3.0_amd64.deb)
 
 ### Run on windows
 
 1. Install ffmpeg on your computer
-   - Included in the zip file is a ffmpeg folder
-   - Copy the ffmpeg folder to c:\Program Files\
+   - Download ffmpeg from [CODEX FFMPEG](https://www.gyan.dev/ffmpeg/builds/)
+   - Copy ffmpeg.exe to a folder located at c:\Program Files\ffmpeg\
 
 ### Run on Mac
 

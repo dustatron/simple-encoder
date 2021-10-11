@@ -4,9 +4,9 @@
 import { Dispatch } from 'react';
 
 export enum ProRes {
-  SmallDraft = 'Draft @ 720',
-  PROXY = 'ProPres Proxy',
-  LT = 'ProPres LT',
+  SmallDraft = 'Draft H264 @ 720',
+  PROXY = 'ProRes Proxy',
+  LT = 'ProRes LT',
   STANDARD = 'PropRes 422',
   HQ = 'ProRes HQ',
   Quad4 = 'ProRes 4444',
