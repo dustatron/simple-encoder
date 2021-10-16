@@ -32,11 +32,14 @@
   "build": {
     "productName": "Simple Encoder",
     "appId": "org.erb.simpleEncoder",
-    "asar": true,
+    "asar": false,
     "files": [
       "dist",
       "node_modules",
-      "package.json"
+      "package.json",
+      "node_modules/ffmpeg-static/bin/${os}/${arch}/ffmpeg",
+      "node_modules/ffmpeg-static/index.js",
+      "node_modules/ffmpeg-static/package.json"
     ],
     "afterSign": ".erb/scripts/notarize.js",
     "mac": {
@@ -44,7 +47,16 @@
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
-      "gatekeeperAssess": false
+      "gatekeeperAssess": false,
+      "extraFiles": [
+        {
+          "from": "resources/darwin",
+          "to": "Resources/app/dist/main",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
     },
     "dmg": {
       "contents": [
@@ -61,11 +73,37 @@
       ]
     },
     "win": {
+      "files": [
+        "!node_modules/ffmpeg-static/bin/mac${/*}",
+        "!node_modules/ffmpeg-static/bin/linux${/*}"
+      ],
+      "extraFiles": [
+        {
+          "from": "resources/win32",
+          "to": "Resources/app/dist/main",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ],
       "target": [
         "nsis"
       ]
     },
     "linux": {
+      "files": [
+        "!node_modules/ffmpeg-static/bin/mac${/*}",
+        "!node_modules/ffmpeg-static/bin/win${/*}"
+      ],
+      "extraFiles": [
+        {
+          "from": "resources/linux",
+          "to": "Resources/app/dist/main",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ],
       "target": [
         "AppImage",
         "deb"
@@ -253,7 +291,9 @@
     "electron-debug": "^3.2.0",
     "electron-log": "^4.3.5",
     "electron-updater": "^4.3.8",
+    "electron-util": "^0.17.2",
     "ffmpeg-static": "^4.4.0",
+    "ffmpeg-static-electron": "^2.0.3",
     "fluent-ffmpeg": "^2.1.2",
     "framer-motion": "^4.1.17",
     "history": "4.x.x",

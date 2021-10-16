@@ -1,7 +1,9 @@
 /* eslint import/prefer-default-export: off, import/no-mutable-exports: off */
-// import { URL } from 'url';
 import path from 'path';
 import FfmpegCommand from 'fluent-ffmpeg';
+import ffmpegPath from 'ffmpeg-static';
+// import { execPath } from './binaries';
+
 import {
   removeFileExtension,
   getPresetNumber,
@@ -13,10 +15,11 @@ export const makeDraft = (
   callback: (index: number, update: Update) => void,
   params: ProResProps
 ) => {
-  const { fileName, filePath, toPath, index, ffmpegPath } = params;
+  const { fileName, filePath, toPath, index } = params;
   const cleanName = removeFileExtension(fileName);
   const promise = new Promise((resolve, reject) => {
     FfmpegCommand.setFfmpegPath(ffmpegPath);
+    console.log('path', ffmpegPath);
     FfmpegCommand(filePath)
       .videoCodec('libx264')
       .outputOptions([
@@ -79,7 +82,7 @@ export const makeProRes = (
   callback: (index: number, update: Update) => void,
   params: ProResProps
 ) => {
-  const { fileName, filePath, toPath, preset, index, ffmpegPath } = params;
+  const { fileName, filePath, toPath, preset, index } = params;
   const cleanName = removeFileExtension(fileName);
 
   const promise = new Promise((resolve, reject) => {
