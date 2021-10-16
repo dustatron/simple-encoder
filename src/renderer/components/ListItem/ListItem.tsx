@@ -9,7 +9,9 @@ import {
   Spinner,
   Text,
   Icon,
+  Stack,
 } from '@chakra-ui/react';
+import { isEmpty } from 'lodash';
 import { CloseIcon } from '@chakra-ui/icons';
 import { FaTag, FaCheckCircle } from 'react-icons/fa';
 import { RiErrorWarningFill } from 'react-icons/ri';
@@ -109,10 +111,14 @@ const ListItem = ({ file, index, dispatch }: Props) => {
         <Text>
           Source: <strong>{file.name}</strong>
         </Text>
-
-        <Box>
-          Status: <Text>{getStatusReport()}</Text>
-        </Box>
+        <Flex justifyContent="space-between">
+          <Box>Status: {getStatusReport()}</Box>
+          {status && status.progress && (
+            <Box color="gray.400" fontWeight="medium">
+              {Math.round(status.progress)}%
+            </Box>
+          )}
+        </Flex>
         {!status.isComplete && (
           <Progress hasStripe isAnimated value={status.progress} />
         )}
