@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
+import { v4 } from 'uuid';
 import {
   ActionsFiles,
   State,
@@ -34,7 +35,7 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
             path: file.path,
             size: file.size,
             type: file.type,
-            key: file.key,
+            key: v4(),
             webkitRelativePath: file.webkitRelativePath,
             status: {
               errorMessage: null,
@@ -47,8 +48,6 @@ const filesReducer: Reducer<State, Action> = (state: State, action: Action) => {
           };
         });
       const updatedState = [...state, ...formatFiles!];
-      console.log('formatFiles', updatedState, payload);
-      // return [...state, ...formatFiles];
       return updatedState;
     case ActionsFiles.ClearAll:
       return [];

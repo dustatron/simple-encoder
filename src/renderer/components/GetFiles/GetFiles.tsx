@@ -29,29 +29,12 @@ import {
   ConvertStatus,
   ProResOptions,
   ProResObject,
+  ProResProps,
 } from '../../utils';
 import { useSettings } from '../../context/SettingsContext';
 import ListItem from '../ListItem';
 
 const { api } = window;
-
-interface ProResProps {
-  filePath: string;
-  fileName: string;
-  toPath: string;
-  preset: ProRes;
-  index: number;
-  originalItem: File;
-  ffmpegPath: string;
-}
-
-export interface Update {
-  progress?: number;
-  hasEnded: boolean;
-  errorMessage: string;
-  hasStarted: boolean;
-  isComplete: boolean;
-}
 
 function GetFiles(): ReactElement {
   const {
@@ -63,7 +46,6 @@ function GetFiles(): ReactElement {
     setAlert,
     fileTypes,
     setSuccess,
-    ffmpegPath,
   } = useSettings();
 
   const [status, setState] = useState<ReactElement<any, any>>();
@@ -159,7 +141,6 @@ function GetFiles(): ReactElement {
         preset: draftFlavor,
         toPath: toLocation,
         originalItem: draftList[j],
-        ffmpegPath,
       };
       const runFFMPEG = new Promise((resolve, reject) => {
         api.send('make:draft', draftParams);
@@ -191,7 +172,6 @@ function GetFiles(): ReactElement {
           preset: proResFlavor,
           toPath: toLocation,
           originalItem: videoList[i],
-          ffmpegPath,
         };
         const runFFMPEG = new Promise((resolve, reject) => {
           api.send('make:prores', params);
@@ -248,7 +228,6 @@ function GetFiles(): ReactElement {
       <Box
         minH="89vh"
         width="100%"
-        // bg="gray.100"
         id="From"
         {...getRootProps({ className: 'dropZone' })} // dropzone element
       >

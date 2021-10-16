@@ -162,7 +162,6 @@ ipcMain.on('make:prores', (event, args) => {
 });
 
 ipcMain.on('make:draft', (event, args) => {
-  console.log('makeDraft');
   const callback = (index: number, update: UpdateVideoInfo) => {
     event.reply('reply:make:draft', { index, ...update });
   };

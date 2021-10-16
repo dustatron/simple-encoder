@@ -13,6 +13,7 @@ import {
   Update,
   ProResObject,
   ProResOptions,
+  ProResProps,
 } from './types';
 import {
   removeFileExtension,
@@ -49,4 +50,5 @@ export type {
   DialogResult,
   Update,
   ProResObject,
+  ProResProps,
 };

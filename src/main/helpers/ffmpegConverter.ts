@@ -2,7 +2,6 @@
 import path from 'path';
 import FfmpegCommand from 'fluent-ffmpeg';
 import ffmpegPath from 'ffmpeg-static';
-// import { execPath } from './binaries';
 
 import {
   removeFileExtension,
@@ -19,7 +18,6 @@ export const makeDraft = (
   const cleanName = removeFileExtension(fileName);
   const promise = new Promise((resolve, reject) => {
     FfmpegCommand.setFfmpegPath(ffmpegPath);
-    console.log('path', ffmpegPath);
     FfmpegCommand(filePath)
       .videoCodec('libx264')
       .outputOptions([

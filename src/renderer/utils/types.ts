@@ -97,10 +97,6 @@ export interface SettingsHook {
   setAlert: (alertMessage: string | null) => void;
   success: string | null;
   setSuccess: (successMessage: string | null) => void;
-  ffmpegPath: string;
-  setFfmpegPath: (path: string) => void;
-  os: string;
-  setOs: (os: OsOptions) => void;
 }
 
 export type Reducer<State, Action> = (state: State, action: Action) => State;
@@ -115,4 +111,13 @@ export enum OsOptions {
   Win32 = 'win32',
   Custom = 'custom',
   NAN = 'NO OS',
+}
+
+export interface ProResProps {
+  filePath: string;
+  fileName: string;
+  toPath: string;
+  preset: ProRes;
+  index: number;
+  originalItem: File;
 }

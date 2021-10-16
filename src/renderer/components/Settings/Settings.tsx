@@ -8,24 +8,13 @@ import {
   FormLabel,
   Text,
   Box,
-  Select,
 } from '@chakra-ui/react';
-import { OsOptions } from 'renderer/utils/types';
 import { useSettings } from '../../context/SettingsContext';
 import { DEFAULT_FILE_EXTENSION, DialogResult } from '../../utils';
 
 const Settings = () => {
   const { api } = window;
-  const {
-    toLocation,
-    setToLocation,
-    fileTypes,
-    setFileTypes,
-    ffmpegPath,
-    setFfmpegPath,
-    os,
-    setOs,
-  } = useSettings();
+  const { toLocation, setToLocation, fileTypes, setFileTypes } = useSettings();
 
   const openDialogBox = async () => {
     api.send('select:folder');
@@ -37,68 +26,46 @@ const Settings = () => {
   };
 
   return (
-    <Stack spacing="10">
+    <Stack spacing="8">
       <FormControl id="Destination" isRequired>
         <FormLabel>Destination Folder</FormLabel>
         <HStack>
           <Input
+            w="80%"
             type="text"
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
           />
-          <Button onClick={openDialogBox}>Location</Button>
+          <Box w="5.5em">
+            <Button w="100%" onClick={openDialogBox}>
+              Folder
+            </Button>
+          </Box>
         </HStack>
       </FormControl>
-      <Stack direction="row">
-        <FormControl id="file-types">
-          <FormLabel>File Extension Filter</FormLabel>
-          <Input
-            value={fileTypes}
-            onChange={(e) => setFileTypes(e.target.value)}
-          />
-          <Text fontSize="sm" color="gray.500" margin="0.5em 0">
-            Comma separated list of file extensions to accept.
-          </Text>
-        </FormControl>
-        <Box>
-          <Button
-            marginTop="8"
-            onClick={() => {
-              setFileTypes(DEFAULT_FILE_EXTENSION);
-            }}
-          >
-            defaults
-          </Button>
-        </Box>
-      </Stack>
-      <Stack direction="row">
-        <FormControl id="file-types" width={9 / 13}>
-          <FormLabel>Path to FFMPEG</FormLabel>
-          <Input
-            value={ffmpegPath}
-            isDisabled={os !== OsOptions.Custom}
-            onChange={(e) => setFfmpegPath(e.target.value)}
-          />
-        </FormControl>
-        <Box width={4 / 13}>
-          <Select
-            marginTop="8"
-            value={os}
-            onChange={(e) => {
-              setOs(e.target.value as OsOptions);
-            }}
-          >
-            <option value={OsOptions.Linux}>Linux</option>
-            <option value={OsOptions.Win32}>Windows</option>
-            <option value={OsOptions.Darwin}>Mac</option>
-            <option value={OsOptions.Custom}>Custom</option>
-          </Select>
-        </Box>
-      </Stack>
       <Box>
-        <Text fontSize="lg">Basic Details</Text>
-        <Text as="p" fontSize="sm" color="gray.500">
-          OS Detected: {os}
+        <Stack direction="row">
+          <FormControl id="file-types" w="80%">
+            <FormLabel>File Extension Filter</FormLabel>
+            <Input
+              value={fileTypes}
+              onChange={(e) => setFileTypes(e.target.value)}
+            />
+          </FormControl>
+          <Box w="5.5em">
+            <Button
+              w="100%"
+              marginTop="8"
+              onClick={() => {
+                setFileTypes(DEFAULT_FILE_EXTENSION);
+              }}
+            >
+              defaults
+            </Button>
+          </Box>
+        </Stack>
+        <Text fontSize="sm" color="gray.500" margin="0.5em 0">
+          Comma separated list of file extensions to accept.
         </Text>
       </Box>
     </Stack>
