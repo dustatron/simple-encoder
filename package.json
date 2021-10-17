@@ -51,7 +51,7 @@
       "gatekeeperAssess": false,
       "extraFiles": [
         {
-          "from": "resources/darwin",
+          "from": "resources/mac",
           "to": "Resources/app/dist/main",
           "filter": [
             "**/*"
