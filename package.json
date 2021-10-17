@@ -80,7 +80,7 @@
       "extraFiles": [
         {
           "from": "resources/win32",
-          "to": "Resources/app/dist/main",
+          "to": "resources/app/dist/main/",
           "filter": [
             "**/*"
           ]
@@ -98,7 +98,7 @@
       "extraFiles": [
         {
           "from": "resources/linux",
-          "to": "Resources/app/dist/main",
+          "to": "resources/app/dist/main",
           "filter": [
             "**/*"
           ]
