@@ -113,10 +113,12 @@ const ListItem = ({ file, index, dispatch }: Props) => {
         </Text>
         <Flex justifyContent="space-between">
           <Box>Status: {getStatusReport()}</Box>
-          {status && status.progress && (
+          {status && status.progress ? (
             <Box color="gray.400" fontWeight="medium">
               {Math.round(status.progress)}%
             </Box>
+          ) : (
+            ''
           )}
         </Flex>
         {!status.isComplete && (
